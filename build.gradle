@@ -255,26 +255,13 @@ publishMods {
     modLoaders.add("forge")
 
     github {
-        accessToken = providers.environmentVariable(secrets["GITHUB_TOKEN"])
+        accessToken = secrets["GITHUB_TOKEN"]
         repository = "misyfitz/decorative-stands"
         commitish = "main/1.20.1-0.1"
     }
 
-    /*modrinth {
-        accessToken = secrets["MODRINTH_TOKEN"]
-        projectId = "wPQ6GgFE"
-        minecraftVersions.add(minecraft_version)
-
-        requires {
-            id = "LNytGWDc"
-        }
-        optional {
-            id = "u6dRKJwZ"
-        }
-    }*/
-
     curseforge {
-        accessToken = providers.environmentVariable(secrets["CURSEFORGE_TOKEN"])
+        accessToken = secrets["CURSEFORGE_TOKEN"]
         projectId = "1304159"
         minecraftVersions.add(minecraft_version)
     }
