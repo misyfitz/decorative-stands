@@ -5,6 +5,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.38'
+	id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 def secrets = new Properties()
@@ -242,25 +243,25 @@ tasks.withType(JavaCompile).configureEach {
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
-/*wrapper {
-    gradleVersion = '8.4'
+wrapper {
+    gradleVersion = '8.14'
     distributionType = Wrapper.DistributionType.BIN
 }
 
 publishMods {
-    changelog = "Check out the detailed changelog at https://github.com/misyfitz/create_acoustics/blob/main/CHANGELOG.md"
+    changelog = "Check out the changelog at https://github.com/misyfitz/decorative-stands/blob/main/CHANGELOG.md"
     type = STABLE
     file = jar.archiveFile
     modLoaders.add("forge")
 
     github {
-        accessToken = secrets.GITHUB_TOKEN
-        repository = "misyfitz/e"
-        commitish = "mc1.19.2/main"
+        accessToken = secrets["GITHUB_TOKEN"]
+        repository = "misyfitz/decorative-stands"
+        commitish = "main/1.20.1-0.1"
     }
 
-    modrinth {
-        accessToken = secrets.MODRINTH_TOKEN
+    /*modrinth {
+        accessToken = secrets["MODRINTH_TOKEN"]
         projectId = "wPQ6GgFE"
         minecraftVersions.add(minecraft_version)
 
@@ -270,11 +271,11 @@ publishMods {
         optional {
             id = "u6dRKJwZ"
         }
-    }
+    }*/
 
     curseforge {
-        accessToken = secrets.CURSEFORGE_TOKEN
-        projectId = "936020"
+        accessToken = secrets["CURSEFORGE_TOKEN"]
+        projectId = "1304159"
         minecraftVersions.add(minecraft_version)
     }
-}*/
+}

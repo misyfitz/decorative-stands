@@ -14,7 +14,7 @@ public class DSCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.decorative_stands.main"))
-            .icon(() -> new ItemStack(DSBlocks.BINOCULAR_STAND.get()))
+            .icon(() -> new ItemStack(DSBlocks.SPYGLASS_STANDS.get("dark_oak").get()))
             .displayItems((params, output) -> {
             	//items
                 output.accept(DSItems.BINOCULAR.get());
