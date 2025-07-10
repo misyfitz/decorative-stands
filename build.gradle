@@ -249,13 +249,13 @@ wrapper {
 }
 
 publishMods {
+    file = remapJar.archiveFile
     changelog = "Check out the changelog at https://github.com/misyfitz/decorative-stands/blob/main/CHANGELOG.md"
     type = STABLE
-    file = jar.archiveFile
     modLoaders.add("forge")
 
     github {
-        accessToken = secrets["GITHUB_TOKEN"]
+        accessToken = providers.environmentVariable(secrets["GITHUB_TOKEN"])
         repository = "misyfitz/decorative-stands"
         commitish = "main/1.20.1-0.1"
     }
@@ -274,7 +274,7 @@ publishMods {
     }*/
 
     curseforge {
-        accessToken = secrets["CURSEFORGE_TOKEN"]
+        accessToken = providers.environmentVariable(secrets["CURSEFORGE_TOKEN"])
         projectId = "1304159"
         minecraftVersions.add(minecraft_version)
     }
