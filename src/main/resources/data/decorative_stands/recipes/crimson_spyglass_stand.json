@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:spyglass"
+    },
+    "W": {
+      "item": "minecraft:stripped_crimson_stem"
+    }
+  },
+  "pattern": [
+    " S ",
+    " W ",
+    "WWW"
+  ],
+  "result": {
+    "item": "decorative_stands:spyglass_stand_crimson"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,67 @@
+# === Java / General ===
+*.class
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# === Gradle ===
+.gradle/
+build/
+out/
+secrets.properties
+
+!gradle/wrapper/gradle-wrapper.jar
+
+# === IDEs ===
+
+# Eclipse
+.project
+.classpath
+.settings/
+.metadata/
+bin/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# VS Code (if used)
+.vscode/
+
+# === Forge Specific ===
+run/
+runClient/
+runServer/
+runGameTestServer/
+runData/
+debug/
+logs/
+eclipse/
+runClient.launch
+runServer.launch
+runData.launch
+runGameTestServer.launch
+
+# === MDK Forge Files (you may keep them if you modify them)
+forge*changelog.txt
+CREDITS.txt
+LICENSE.txt
+
+# === OS / Misc ===
+*.suo
+*.user
+*.sdf
+*.db
+*.pid
+*.orig
+
+# === Cache / CI ===
+/.cache/
+/dist/
+/build/libs/
+/build/tmp/
+/build/reports/

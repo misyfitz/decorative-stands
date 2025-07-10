@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:spyglass"
+    },
+    "W": {
+      "item": "minecraft:stripped_dark_oak_log"
+    }
+  },
+  "pattern": [
+    " S ",
+    " W ",
+    "WWW"
+  ],
+  "result": {
+    "item": "decorative_stands:spyglass_stand_dark_oak"
+  },
+  "show_notification": true
+}

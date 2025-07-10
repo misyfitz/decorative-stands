@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "decorative_stands:binocular"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    }
+  },
+  "pattern": [
+    " B ",
+    " S ",
+    "SSS"
+  ],
+  "result": {
+    "item": "decorative_stands:binocular_stand"
+  },
+  "show_notification": true
+}

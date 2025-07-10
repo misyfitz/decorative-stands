@@ -1,0 +1,7 @@
+{
+  "decorative_stands:binocular_use": {
+    "sounds": [
+      "minecraft:item/spyglass/use"
+    ]
+  }
+}

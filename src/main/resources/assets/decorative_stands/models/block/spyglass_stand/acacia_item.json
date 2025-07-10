@@ -1,0 +1,8 @@
+{
+  "parent": "decorative_stands:block/spyglass_stand/item",
+  "textures": {
+    "3": "minecraft:block/stripped_acacia_log",
+    "4": "minecraft:block/stripped_acacia_log",
+    "particle": "minecraft:block/stripped_acacia_log"
+  }
+}

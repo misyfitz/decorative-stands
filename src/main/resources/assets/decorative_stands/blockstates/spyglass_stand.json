@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "facing=north": { "model": "decorative_stands:block/spyglass_stand/block", "y": 180 },
+    "facing=south": { "model": "decorative_stands:block/spyglass_stand/block", "y": 0 },
+    "facing=west":  { "model": "decorative_stands:block/spyglass_stand/block", "y": 90 },
+    "facing=east":  { "model": "decorative_stands:block/spyglass_stand/block", "y": 270 }
+  }
+}
+

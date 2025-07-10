@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "decorative_stands:item/binocular_2d"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "block.decorative_stands.spyglass_stand": "Spyglass Stand",
+  "block.decorative_stands.binocular_stand": "Binocular Stand",
+  "item.decorative_stands.binocular": "Binocular",
+  "itemGroup.decorative_stands.main": "Decorative Stands",
+  "tooltip.decorative_stands.microphone.tooltip": "Records sound",
+  "block.decorative_stands.spyglass_stand_acacia": "Acacia Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_bamboo": "Bamboo Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_birch": "Birch Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_cherry": "Cherry Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_dark_oak": "Dark Oak Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_jungle": "Jungle Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_mangrove": "Mangrove Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_oak": "Oak Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_spruce": "Spruce Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_crimson": "Crimson Spyglass Stand",
+  "block.decorative_stands.spyglass_stand_warped": "Warped Spyglass Stand"
+}
