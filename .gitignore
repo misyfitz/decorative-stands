@@ -10,6 +10,7 @@ Thumbs.db
 # === Gradle ===
 .gradle/
 build/
+run-data/
 out/
 secrets.properties
 
@@ -19,6 +20,7 @@ secrets.properties
 
 # Eclipse
 .project
+.eclipse/
 .classpath
 .settings/
 .metadata/
