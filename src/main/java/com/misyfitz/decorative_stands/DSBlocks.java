@@ -11,6 +11,7 @@ import com.misyfitz.decorative_stands.content.block.SpyglassStandBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -29,18 +30,18 @@ public class DSBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, DecorativeStands.MODID);
 
-    public static final RegistryObject<Block> SPYGLASS_STAND = registerBlock("spyglass_stand",
-            () -> new SpyglassStandBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    //public static final RegistryObject<Block> SPYGLASS_STAND = registerBlock("spyglass_stand",
+            //() -> new SpyglassStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final RegistryObject<Block> BINOCULAR_STAND = registerBlock("binocular_stand",
-            () -> new BinocularStandBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            () -> new BinocularStandBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
 
     // Dynamic variants of Spyglass Stand (e.g., for each log type)
     public static final Map<String, RegistryObject<Block>> SPYGLASS_STANDS = new HashMap<>();
 
     public static void registerSpyglassStandVariant(String name) {
         RegistryObject<Block> block = registerBlock("spyglass_stand_" + name,
-                () -> new SpyglassStandBlock(BlockBehaviour.Properties.of().noOcclusion()));
+                () -> new SpyglassStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
         SPYGLASS_STANDS.put(name, block);
     }
 

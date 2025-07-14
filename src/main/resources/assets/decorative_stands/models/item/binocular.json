@@ -1,18 +1,12 @@
 {
-  "parent": "minecraft:item/handheld",
-  "loader": "forge:separate_transforms",
-  "base": {
-    "parent": "decorative_stands:item/binocular_3d"
-  },
-  "perspectives": {
-    "gui": {
-      "parent": "decorative_stands:item/binocular_2d"
-    },
-    "ground": {
-      "parent": "decorative_stands:item/binocular_2d"
-    },
-    "fixed": {
-      "parent": "decorative_stands:item/binocular_2d"
+  "parent": "decorative_stands:item/binocular_3d_idle",
+
+  "overrides": [
+    {
+      "predicate": {
+        "decorative_stands:zooming": 1
+      },
+      "model": "decorative_stands:item/binocular_3d_used"
     }
-  }
+  ]
 }

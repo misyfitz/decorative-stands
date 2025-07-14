@@ -1,17 +1,19 @@
 package com.misyfitz.decorative_stands.client;
 
 import com.misyfitz.decorative_stands.content.block.entity.AbstractStandBlockEntity;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,43 +21,57 @@ import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nullable;
 
-import org.lwjgl.opengl.GL11;
-
 @Mod.EventBusSubscriber(modid = "decorative_stands", value = Dist.CLIENT)
 public class ClientZoomHandler {
 
     private static boolean isZooming = false;
     private static BlockPos zoomedBlockPos = null;
     private static float customFov = 0.1F;
-    @SuppressWarnings("removal")
-	private static ResourceLocation scopeTexture = new ResourceLocation("minecraft", "textures/misc/spyglass_scope.png");
-    private static float scopeScale = 0.5F;
+    private static int isItemUse = 0;
+    public static ResourceLocation currentScope = null;
+    private static ItemStack zoomItem = ItemStack.EMPTY;
+    //private static float scopeScale = 0.5F;
+    @SuppressWarnings("unused")
+	private static float scopeAspectRatio = 1.0F;
 
     private static CameraType previousCameraType = null;
+    
+    public static final IGuiOverlay ZOOM_OVERLAY = (gui, guiGraphics, partialTick, width, height) -> {
 
-    // --- Zoom control API ---
-    @SuppressWarnings("removal")
-	public static void startCustomZoom() {
-        startCustomZoom(null, 0.1F, new ResourceLocation("minecraft", "textures/misc/spyglass_scope.png"));
+    	if (isZooming && currentScope != null) {
+            renderCustomScopeOverlay(guiGraphics, partialTick);
+        }
+    };
+
+
+    public static void startZoomFromItem(ResourceLocation texture, float ratio) {
+        isItemUse = 1;
+        zoomItem = Minecraft.getInstance().player.getMainHandItem();
+        startCustomZoom(null, 0.1F, ratio, texture);
     }
     
     @SuppressWarnings("removal")
 	public static void startCustomZoom(BlockPos pos) {
-        startCustomZoom(pos, 0.1F, new ResourceLocation("minecraft", "textures/misc/spyglass_scope.png"));
+        startCustomZoom(pos, 0.1F, 1.0F, ScopeOverlay.SPYGLASS_SCOPE);
     }
 
     public static void startCustomZoom(BlockPos pos, ResourceLocation texture) {
-        startCustomZoom(pos, 0.1F, texture);
+        startCustomZoom(pos, 0.1F, 1.0F, texture);
+    }
+    
+    public static void startCustomZoom(BlockPos pos, float ratio, ResourceLocation texture) {
+        startCustomZoom(pos, 0.1F, ratio, texture);
     }
 
-    public static void startCustomZoom(BlockPos pos, float fov, ResourceLocation texture) {
+    public static void startCustomZoom(BlockPos pos, float fov, float ratio, ResourceLocation texture) {
         if (isZooming)
             return;
 
+        scopeAspectRatio = ratio;
     	zoomedBlockPos = pos;
         isZooming = true;
         customFov = fov;
-        scopeTexture = texture;
+        currentScope = texture;
 
         Minecraft mc = Minecraft.getInstance();
         if (mc.player != null) {
@@ -74,11 +90,8 @@ public class ClientZoomHandler {
     public static void stopZoom() {
         if (!isZooming)
             return;
-
+        
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player != null) {
-            mc.player.setShiftKeyDown(false);
-        }
 
         // Clear block usage state
         if (zoomedBlockPos != null && mc.level != null) {
@@ -92,13 +105,16 @@ public class ClientZoomHandler {
         }
 
         // Restore previous camera type
-        if (previousCameraType != null) {
-            mc.options.setCameraType(previousCameraType);
-            previousCameraType = null;
-        }
+//        if (previousCameraType != null) {
+//            mc.options.setCameraType(previousCameraType);
+//            previousCameraType = null;
+//        }
 
         isZooming = false;
         zoomedBlockPos = null;
+        zoomItem = null;
+        isItemUse = 0;
+        currentScope = null;
 
         MinecraftForge.EVENT_BUS.unregister(ClientZoomHandler.class);
     }
@@ -109,27 +125,36 @@ public class ClientZoomHandler {
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END)
             return;
-
         Minecraft mc = Minecraft.getInstance();
         if (!isZooming || mc.level == null || mc.player == null)
             return;
-
-        // Stop zoom if player exits first-person or presses crouch
-        if (mc.options.keyShift.isDown() || mc.options.getCameraType() != CameraType.FIRST_PERSON) {
-            stopZoom();
-            return;
+        
+//        if (mc.options.getCameraType() != CameraType.FIRST_PERSON) {
+//        	previousCameraType = null;
+//        	return;
+//        	}
+        switch (isItemUse) {
+            case 0 -> {
+                if (mc.options.keyShift.isDown()
+                	|| mc.options.keyLeft.isDown()
+                    || mc.options.keyRight.isDown()
+                    || mc.options.keyUp.isDown()
+                    || mc.options.keyDown.isDown()) {
+                    stopZoom();
+                    return;
+                }
+            }
+            case 1 -> {
+                boolean changedItem = !ItemStack.isSameItemSameTags(zoomItem, mc.player.getMainHandItem());
+                if (mc.options.keyShift.isDown() || changedItem) {
+                    stopZoom();
+                    return;
+                }
+            }
         }
     }
 
-    @SubscribeEvent
-    public static void onRenderOverlay(RenderGuiOverlayEvent.Post event) {
-        if (!isZooming) return;
-        renderCustomScopeOverlay(event.getGuiGraphics(), Minecraft.getInstance().getFrameTime());
-        //float partialTick = Minecraft.getInstance().getFrameTime();
-        //renderCustomScopeOverlay(event.getGuiGraphics(), partialTick);
-    }
-
-
+    
     @SubscribeEvent
     public static void onComputeFov(ComputeFovModifierEvent event) {
         if (isZooming) {
@@ -137,44 +162,18 @@ public class ClientZoomHandler {
         }
     }
 
-    // --- Overlay rendering ---
     private static void renderCustomScopeOverlay(GuiGraphics guiGraphics, float partialTick) {
         Minecraft mc = Minecraft.getInstance();
-        int screenWidth = mc.getWindow().getGuiScaledWidth();
-        int screenHeight = mc.getWindow().getGuiScaledHeight();
+        int width = mc.getWindow().getGuiScaledWidth();
+        int height = mc.getWindow().getGuiScaledHeight();
 
-        float f = (float)Math.min(screenWidth, screenHeight);
-        scopeScale = Mth.lerp(0.5F * partialTick, scopeScale, 1.125F);
-        float scaledSize = Math.min((float) screenWidth / f, (float) screenHeight / f) * scopeScale;
-
-        int texWidth = Mth.floor(f * scaledSize);
-        int texHeight = Mth.floor(f * scaledSize);
-        int x0 = (screenWidth - texWidth) / 2;
-        int y0 = (screenHeight - texHeight) / 2;
-        int x1 = x0 + texWidth;
-        int y1 = y0 + texHeight;
-
-        GlStateManager._enableBlend();
-        GlStateManager._blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GlStateManager._depthMask(false);
-        //GlStateManager.alphaFunc(GL11.GL_LESS, 1.0F);
-        GlStateManager._depthMask(true);
-
-        //RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //RenderSystem.setShaderTexture(1, scopeTexture);
-
-        guiGraphics.blit(scopeTexture, x0, y0, -10, 0.0F, 0.0F, texWidth, texHeight, texWidth, texHeight);
-        guiGraphics.fill(RenderType.guiOverlay(), 0, y1, screenWidth, screenHeight, -300, 0xFF000000);
-
-        // Blacken outer screen
-        //guiGraphics.fill(RenderType.guiOverlay(), 0, y1, screenWidth, screenHeight, -90, 0xFF000000);
-        guiGraphics.fill(RenderType.guiOverlay(), 0, 0, screenWidth, y0, -90, 0xFF000000);
-        guiGraphics.fill(RenderType.guiOverlay(), 0, y0, x0, y1, -90, 0xFF000000);
-        guiGraphics.fill(RenderType.guiOverlay(), x1, y0, screenWidth, y1, -90, 0xFF000000);
-
-        GlStateManager._disableBlend();
-        //RenderSystem.enableDepthTest(); // Restore normal depth
-        //RenderSystem.disableBlend();
+        if (currentScope != null) {
+            if (currentScope.equals(ScopeOverlay.SPYGLASS_SCOPE)) {
+                ScopeOverlay.CUSTOM_SCOPE_SPYGLASS.render(null, guiGraphics, partialTick, width, height);
+            } else {
+                ScopeOverlay.CUSTOM_SCOPE_BINOCULAR.render(null, guiGraphics, partialTick, width, height);
+            }
+        }
     }
 
     // --- Accessors ---

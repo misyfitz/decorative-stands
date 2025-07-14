@@ -1,0 +1,105 @@
+package com.misyfitz.decorative_stands.client;
+
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+//import com.mojang.blaze3d.vertex.PoseStack;
+
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderStateShard.TransparencyStateShard;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Display.RenderState;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import net.minecraft.client.renderer.RenderType;
+
+
+public class ScopeOverlay {
+    @SuppressWarnings("removal")
+	public static final ResourceLocation SPYGLASS_SCOPE = new ResourceLocation("decorative_stands", "textures/misc/spyglass_scope.png");
+    @SuppressWarnings("removal")
+	public static final ResourceLocation BINOCULAR_SCOPE = new ResourceLocation("decorative_stands", "textures/misc/binocular_scope.png");
+    
+    private static final TransparencyStateShard TRANSLUCENT_TRANSPARENCY = new TransparencyStateShard("translucent_transparency", () -> {
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(
+            GlStateManager.SourceFactor.SRC_ALPHA,
+            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+            GlStateManager.SourceFactor.ONE,
+            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+        );
+    }, () -> {
+        RenderSystem.disableBlend();
+        RenderSystem.defaultBlendFunc();
+    });
+
+    public static final IGuiOverlay CUSTOM_SCOPE_SPYGLASS = (forgeGui, guiGraphics, partialTick, width, height) -> {
+        float scopeScale = 1F;
+        
+        RenderSystem.enableBlend();
+//        TRANSLUCENT_TRANSPARENCY.setupRenderState();
+//        RenderSystem.setShaderColor(1F, 1F, 1F, 0.85F); // Adjust alpha as needed
+//
+//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+//        RenderSystem.setShaderTexture(0, NORMAL_SCOPE);
+
+        
+        float f = (float)Math.min(width, height);
+        float f1 = Math.min((float)width / f, height / f) * scopeScale;
+        int i = Mth.floor(f * f1);
+        int j = Mth.floor(f * f1);
+        int k = (width - i) / 2;
+        int l = (height - j) / 2;
+        int i1 = k + i;
+        int j1 = l + j;
+        guiGraphics.blit(SPYGLASS_SCOPE, k, l, 0, 0.0F, 0.0F, i, j, i, j);
+        guiGraphics.fill(RenderType.guiOverlay(), 0, j1, width, height, -90, -16777216); // top
+        guiGraphics.fill(RenderType.guiOverlay(), 0, 0, width, l, -90, -16777216);       // bottom
+        guiGraphics.fill(RenderType.guiOverlay(), 0, l, k, j1, -90, -16777216);          // left
+        guiGraphics.fill(RenderType.guiOverlay(), i1, l, width, j1, -90, -16777216);     // right
+//        RenderSystem.setShaderColor(1F, 1F, 1F, 1F); // Reset color
+//        TRANSLUCENT_TRANSPARENCY.clearRenderState(); // Clean up
+        RenderSystem.disableBlend();;
+    };
+
+
+
+
+    public static final IGuiOverlay CUSTOM_SCOPE_BINOCULAR = (gui, guiGraphics, partialTick, width, height) -> {
+        float screenMin = Math.min(width, height);
+        float scopeScale = 1.125F;
+        
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.disableDepthTest();
+        RenderSystem.depthMask(false);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        
+        float scaledHeight = screenMin * scopeScale;
+        float scaledWidth = scaledHeight * 1.5F;
+
+        int texWidth = Mth.floor(scaledWidth);
+        int texHeight = Mth.floor(scaledHeight);
+
+        int x0 = (width - texWidth) / 2;
+        int y0 = (height - texHeight) / 2;
+        int x1 = x0 + texWidth;
+        int y1 = y0 + texHeight;
+        
+        guiGraphics.blit(BINOCULAR_SCOPE, x0, y0, -10, 0.0F, 0.0F, texWidth, texHeight, texWidth, texHeight);
+
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, BINOCULAR_SCOPE);
+        
+        guiGraphics.fill(RenderType.guiOverlay(), 0, 0, width, y0, -90, 0xFF000000);     // top
+        guiGraphics.fill(RenderType.guiOverlay(), 0, y1, width, height, -90, 0xFF000000); // bottom
+        guiGraphics.fill(RenderType.guiOverlay(), 0, y0, x0, y1, -90, 0xFF000000);       // left
+        guiGraphics.fill(RenderType.guiOverlay(), x1, y0, width, y1, -90, 0xFF000000);   // right
+        
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.depthMask(true);
+        RenderSystem.enableDepthTest();
+        
+    };
+}

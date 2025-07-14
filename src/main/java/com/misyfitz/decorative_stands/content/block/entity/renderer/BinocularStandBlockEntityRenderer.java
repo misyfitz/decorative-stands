@@ -67,7 +67,8 @@ public class BinocularStandBlockEntityRenderer implements BlockEntityRenderer<Bi
                 double localZ = lookVec.x * sin + lookVec.z * cos;
                 double localY = lookVec.y;
 
-                float zDegrees = (float) Math.toDegrees(localZ);
+                @SuppressWarnings("unused")
+				float zDegrees = (float) Math.toDegrees(localZ);
                 float xDegrees = (float) Math.toDegrees(localX);
                 float yDegrees = -(float) Math.toDegrees(localY);
 
@@ -88,7 +89,7 @@ public class BinocularStandBlockEntityRenderer implements BlockEntityRenderer<Bi
         }
 
         // Render the binocular item model directly
-        ItemStack binocularStack = new ItemStack(DSItems.BINOCULAR.get()); // Replace with your actual binocular item
+        ItemStack binocularStack = new ItemStack(DSItems.BINOCULAR.get());
         Minecraft.getInstance().getItemRenderer().renderStatic(
             binocularStack,
             ItemDisplayContext.HEAD,
@@ -104,7 +105,8 @@ public class BinocularStandBlockEntityRenderer implements BlockEntityRenderer<Bi
     }
 
     
-    private int getLightLevel(Level level, BlockPos pos) {
+    @SuppressWarnings("unused")
+	private int getLightLevel(Level level, BlockPos pos) {
     	int bLight = level.getBrightness(LightLayer.BLOCK, pos);
     	int sLight = level.getBrightness(LightLayer.SKY, pos);
     	return LightTexture.pack(bLight, sLight);

@@ -1,5 +1,6 @@
 {
   "values": [
+    "decorative_stands:binocular_stand",
     "decorative_stands:spyglass_stand_cherry",
     "decorative_stands:spyglass_stand_crimson",
     "decorative_stands:spyglass_stand_birch",
@@ -9,6 +10,7 @@
     "decorative_stands:spyglass_stand_dark_oak",
     "decorative_stands:spyglass_stand_jungle",
     "decorative_stands:spyglass_stand_mangrove",
-    "decorative_stands:spyglass_stand_spruce"
+    "decorative_stands:spyglass_stand_spruce",
+    "minecraft:armor_stand"
   ]
 }
