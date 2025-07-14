@@ -1,17 +1,22 @@
 package com.misyfitz.decorative_stands.content.item;
 
-import net.minecraft.client.model.HumanoidModel;
+import com.misyfitz.decorative_stands.client.ClientZoomHandler;
+import com.misyfitz.decorative_stands.client.ScopeOverlay;
+import com.mojang.blaze3d.vertex.PoseStack;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
-import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 
 import java.util.function.Consumer;
 
@@ -29,12 +34,20 @@ public class BinocularItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        pPlayer.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);
-        pPlayer.awardStat(Stats.ITEM_USED.get(this));
-        ClientZoomHandler.startCustomZoom();
-        return ItemUtils.startUsingInstantly(pLevel, pPlayer, pUsedHand);
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        player.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);
+        player.awardStat(Stats.ITEM_USED.get(this));
+
+        if (level.isClientSide) {
+        	ClientZoomHandler.startZoomFromItem(ScopeOverlay.BINOCULAR_SCOPE, 1.5F);
+        }
+
+        player.startUsingItem(hand); // Triggers use animation and property override
+        return InteractionResultHolder.consume(stack);
     }
+
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
@@ -52,28 +65,37 @@ public class BinocularItem extends Item {
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.CUSTOM; // Important: use CUSTOM so we can override it fully
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.SPYGLASS;
     }
+    
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
 
-            private static final HumanoidModel.ArmPose BINOCULAR = HumanoidModel.ArmPose.create("BINOCULAR", true, (model, entity, arm) -> {
-                model.rightArm.xRot = -1.5F;
-                model.rightArm.yRot = -0.35F;
-                model.leftArm.xRot = -1.5F;
-                model.leftArm.yRot = 0.35F;
-            });
+        	@Override
+        	public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProgress, float swingProgress) {
+        	    if (Minecraft.getInstance().options.getCameraType().isFirstPerson()
+        	        && player.getUseItem() == itemInHand
+        	        && player.isUsingItem()
+        	        && ClientZoomHandler.isZooming()) {
 
-            @Override
-            public HumanoidModel.ArmPose getArmPose(LivingEntity entity, InteractionHand hand, ItemStack stack) {
-                if (entity.getUseItem() == stack && entity.getUsedItemHand() == hand) {
-                    return BINOCULAR;
-                }
-                return HumanoidModel.ArmPose.EMPTY;
-            }
+        	        // Move item off screen to the side: right if right hand, left if left hand
+        	        float sideOffset = 3.0F; // Try increasing if it’s still slightly visible
+        	        int direction = arm == HumanoidArm.RIGHT ? 1 : -1;
+        	        poseStack.translate(direction * sideOffset, 0F, 0F);  // Shift sideways
+
+        	        return true; // Still apply transform (but it's way off-screen)
+        	    }
+
+        	    // Default transform
+        	    int i = arm == HumanoidArm.RIGHT ? 1 : -1;
+        	    poseStack.translate(i * 0.56F, -0.52F, -0.72F);
+        	    return true;
+        	}
+
+
         });
     }
 

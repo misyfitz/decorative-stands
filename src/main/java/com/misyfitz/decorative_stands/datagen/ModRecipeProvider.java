@@ -74,7 +74,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		});
 
 		// Generic recipe using forge:stripped_logs
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DSBlocks.SPYGLASS_STAND.get())
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DSBlocks.SPYGLASS_STANDS.get("oak").get())
 		    .pattern(" S ")
 		    .pattern(" W ")
 		    .pattern("WWW")
