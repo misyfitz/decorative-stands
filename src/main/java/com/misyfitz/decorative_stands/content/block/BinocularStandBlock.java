@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.misyfitz.decorative_stands.DSBlockEntities;
 import com.misyfitz.decorative_stands.client.ClientZoomHandler;
+import com.misyfitz.decorative_stands.client.ScopeOverlay;
 import com.misyfitz.decorative_stands.content.block.entity.BinocularStandBlockEntity;
 
 import net.minecraft.client.Minecraft;
@@ -89,7 +90,7 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
             player.teleportTo(behind.x, player.getY(), behind.z);
             player.setYRot(facing.toYRot());
             player.setXRot(0);
-            ClientZoomHandler.startCustomZoom(pos, new ResourceLocation("decorative_stands", "textures/misc/binocular_scope.png")); // Start zoom with custom overlay
+            ClientZoomHandler.startCustomZoom(pos, 1.5F, ScopeOverlay.BINOCULAR_SCOPE); // Start zoom with custom overlay
             level.playSound(null, pos, SoundEvents.SPYGLASS_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
         return InteractionResult.SUCCESS;

@@ -20,7 +20,7 @@ public class DSBlockEntities {
 			BLOCK_ENTITIES.register("spyglass_stand_be", () -> {
 				// Collect all spyglass stand blocks into an array
 				List<Block> validBlocks = new java.util.ArrayList<>();
-				validBlocks.add(DSBlocks.SPYGLASS_STAND.get());
+				//validBlocks.add(DSBlocks.SPYGLASS_STAND.get());
 				DSBlocks.SPYGLASS_STANDS.values().forEach(ro -> validBlocks.add(ro.get()));
 
 				// Pass all blocks to the builder

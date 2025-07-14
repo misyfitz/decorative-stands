@@ -104,7 +104,8 @@ public class SpyglassStandBlockEntityRenderer implements BlockEntityRenderer<Spy
         poseStack.popPose();
     }
 
-    private int getLightLevel(Level level, BlockPos pos) {
+    @SuppressWarnings("unused")
+	private int getLightLevel(Level level, BlockPos pos) {
     	int bLight = level.getBrightness(LightLayer.BLOCK, pos);
     	int sLight = level.getBrightness(LightLayer.SKY, pos);
     	return LightTexture.pack(bLight, sLight);

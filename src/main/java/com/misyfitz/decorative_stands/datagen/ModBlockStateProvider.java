@@ -27,11 +27,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         generateSpyglassStandItemVariants();
     }
 
-    private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
+    @SuppressWarnings("unused")
+	private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
 
-    private void generateSpyglassStandVariants() {
+    @SuppressWarnings("unused")
+	private void generateSpyglassStandVariants() {
 
         for (String type : DSBlocks.LOG_TYPES) {
             String name = "spyglass_stand_" + type;
@@ -74,7 +76,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
     }
     
-    private void generateSpyglassStandItemVariants() {
+    @SuppressWarnings("unused")
+	private void generateSpyglassStandItemVariants() {
 
         for (String type : DSBlocks.LOG_TYPES) {
             String name = "spyglass_stand_" + type;

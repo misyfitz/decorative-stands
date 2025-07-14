@@ -1,22 +1,39 @@
-package com.misyfitz.decorative_stands;
+package com.misyfitz.decorative_stands.util;
 
-import java.util.Collections;
-import java.util.Locale;
+import com.misyfitz.decorative_stands.DecorativeStands;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 
 public class DSTags {
+	public static class Blocks{
+		
+		@SuppressWarnings({ "removal", "unused" })
+		private static TagKey<Block> tag(String name){
+			return BlockTags.create(new ResourceLocation(DecorativeStands.MODID, name));
+		}
+	}
+	
+	public static class Items{
+		
+		public static final TagKey<Item> STANDS = tag("stands");
+		
+		@SuppressWarnings("removal")
+		private static TagKey<Item> tag(String name){
+			return ItemTags.create(new ResourceLocation(DecorativeStands.MODID, name));
+		}
+	}
+	
+    public static void register(IEventBus eventBus) {
 
-    public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
+    }
+	
+    /*public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
         return registry.tags().createOptionalTagKey(id, Collections.emptySet());
     }
 
@@ -104,7 +121,5 @@ public class DSTags {
         }
     }
     
-    public static void register(IEventBus eventBus) {
-        AllEntityTags.register();
-    }
+     */
 }
