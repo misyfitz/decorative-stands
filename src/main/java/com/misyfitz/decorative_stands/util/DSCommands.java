@@ -1,4 +1,4 @@
-package com.misyfitz.decorative_stands;
+package com.misyfitz.decorative_stands.util;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;

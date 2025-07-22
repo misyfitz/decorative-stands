@@ -1,7 +1,8 @@
 package com.misyfitz.decorative_stands.datagen;
 
-import com.misyfitz.decorative_stands.DSBlocks;
 import com.misyfitz.decorative_stands.DecorativeStands;
+import com.misyfitz.decorative_stands.util.DSBlocks;
+
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -20,8 +21,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        //blockWithItem(AcousticBlocks.PHONOGRAPH);
-
+//        blockWithItem(DSBlocks.BINOCULAR_STAND);
+//        blockWithItem(DSBlocks.DUMMY_STAND);
+    	
         // Register spyglass stand variants
         generateSpyglassStandVariants();
         generateSpyglassStandItemVariants();

@@ -1,5 +1,6 @@
-// 1.20.1	2025-07-12T13:43:34.8391071	Loot Tables
+// 1.20.1	2025-07-15T22:04:52.3942001	Loot Tables
 cfe2f653372159867c2b09ffe2e61af354d60b52 data/decorative_stands/loot_tables/blocks/binocular_stand.json
+079a94e06d17ecede50a93cbe0e96906c118df1b data/decorative_stands/loot_tables/blocks/dummy_stand.json
 8827395fb5e6f0d1cb0c0dbd9b63f84dd2c8f0b8 data/decorative_stands/loot_tables/blocks/spyglass_stand_acacia.json
 22cb49c3ac12aa7d6d71aae61e38af11b336641d data/decorative_stands/loot_tables/blocks/spyglass_stand_birch.json
 e2210dea5e23c2030b8423cc2d4387a26289e3e9 data/decorative_stands/loot_tables/blocks/spyglass_stand_cherry.json

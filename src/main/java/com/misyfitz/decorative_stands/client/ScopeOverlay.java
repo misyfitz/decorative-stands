@@ -1,15 +1,10 @@
 package com.misyfitz.decorative_stands.client;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 //import com.mojang.blaze3d.vertex.PoseStack;
 
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderStateShard.TransparencyStateShard;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Display.RenderState;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraft.client.renderer.RenderType;
 
@@ -20,28 +15,25 @@ public class ScopeOverlay {
     @SuppressWarnings("removal")
 	public static final ResourceLocation BINOCULAR_SCOPE = new ResourceLocation("decorative_stands", "textures/misc/binocular_scope.png");
     
-    private static final TransparencyStateShard TRANSLUCENT_TRANSPARENCY = new TransparencyStateShard("translucent_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(
-            GlStateManager.SourceFactor.SRC_ALPHA,
-            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-            GlStateManager.SourceFactor.ONE,
-            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
-        );
-    }, () -> {
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
-    });
+//    @SuppressWarnings("unused")
+//	private static final TransparencyStateShard TRANSLUCENT_TRANSPARENCY = new TransparencyStateShard("translucent_transparency", () -> {
+//        RenderSystem.enableBlend();
+//        RenderSystem.blendFuncSeparate(
+//            GlStateManager.SourceFactor.SRC_ALPHA,
+//            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+//            GlStateManager.SourceFactor.ONE,
+//            GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+//        );
+//    }, () -> {
+//        RenderSystem.disableBlend();
+//        RenderSystem.defaultBlendFunc();
+//    });
 
     public static final IGuiOverlay CUSTOM_SCOPE_SPYGLASS = (forgeGui, guiGraphics, partialTick, width, height) -> {
         float scopeScale = 1F;
         
         RenderSystem.enableBlend();
-//        TRANSLUCENT_TRANSPARENCY.setupRenderState();
-//        RenderSystem.setShaderColor(1F, 1F, 1F, 0.85F); // Adjust alpha as needed
-//
-//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-//        RenderSystem.setShaderTexture(0, NORMAL_SCOPE);
+
 
         
         float f = (float)Math.min(width, height);
@@ -57,9 +49,8 @@ public class ScopeOverlay {
         guiGraphics.fill(RenderType.guiOverlay(), 0, 0, width, l, -90, -16777216);       // bottom
         guiGraphics.fill(RenderType.guiOverlay(), 0, l, k, j1, -90, -16777216);          // left
         guiGraphics.fill(RenderType.guiOverlay(), i1, l, width, j1, -90, -16777216);     // right
-//        RenderSystem.setShaderColor(1F, 1F, 1F, 1F); // Reset color
-//        TRANSLUCENT_TRANSPARENCY.clearRenderState(); // Clean up
-        RenderSystem.disableBlend();;
+
+        RenderSystem.disableBlend();
     };
 
 
@@ -70,10 +61,10 @@ public class ScopeOverlay {
         float scopeScale = 1.125F;
         
         RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.disableDepthTest();
-        RenderSystem.depthMask(false);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+//        RenderSystem.defaultBlendFunc();
+//        RenderSystem.disableDepthTest();
+//        RenderSystem.depthMask(false);
+//        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         
         float scaledHeight = screenMin * scopeScale;
         float scaledWidth = scaledHeight * 1.5F;
@@ -88,18 +79,20 @@ public class ScopeOverlay {
         
         guiGraphics.blit(BINOCULAR_SCOPE, x0, y0, -10, 0.0F, 0.0F, texWidth, texHeight, texWidth, texHeight);
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, BINOCULAR_SCOPE);
+//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+//        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+//        RenderSystem.setShaderTexture(0, BINOCULAR_SCOPE);
         
         guiGraphics.fill(RenderType.guiOverlay(), 0, 0, width, y0, -90, 0xFF000000);     // top
         guiGraphics.fill(RenderType.guiOverlay(), 0, y1, width, height, -90, 0xFF000000); // bottom
         guiGraphics.fill(RenderType.guiOverlay(), 0, y0, x0, y1, -90, 0xFF000000);       // left
         guiGraphics.fill(RenderType.guiOverlay(), x1, y0, width, y1, -90, 0xFF000000);   // right
         
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.depthMask(true);
-        RenderSystem.enableDepthTest();
+//        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+//        RenderSystem.depthMask(true);
+//        RenderSystem.enableDepthTest();
+        
+        RenderSystem.disableBlend();
         
     };
 }

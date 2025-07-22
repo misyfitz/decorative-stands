@@ -1,6 +1,7 @@
-package com.misyfitz.decorative_stands;
+package com.misyfitz.decorative_stands.util;
 
 
+import com.misyfitz.decorative_stands.DecorativeStands;
 import com.misyfitz.decorative_stands.content.item.BinocularItem;
 
 import net.minecraft.world.item.Item;

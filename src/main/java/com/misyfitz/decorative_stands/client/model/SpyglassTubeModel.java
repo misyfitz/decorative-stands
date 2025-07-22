@@ -1,5 +1,6 @@
 package com.misyfitz.decorative_stands.client.model;
 
+import com.misyfitz.decorative_stands.DecorativeStands;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
@@ -15,8 +16,8 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SpyglassTubeModel extends Model {
     @SuppressWarnings("removal")
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-            new ResourceLocation("decorative_stands", "spyglass_tube"), "main");
+	public static final ModelLayerLocation SPYTUBE_LAYER = new ModelLayerLocation(
+            new ResourceLocation(DecorativeStands.MODID, "spyglass_tube"), "main");
 
     private final ModelPart root;
     private final ModelPart tube;

@@ -1,7 +1,10 @@
-{
-  "decorative_stands:binocular_use": {
-    "sounds": [
-      "minecraft:item/spyglass/use"
-    ]
-  }
+
+"decorative_stands:binocular_use": {
+  "category": "player",
+  "sounds": [
+    {
+      "name": "minecraft:item/spyglass/use",
+      "volume": 1.0
+    }
+  ]
 }

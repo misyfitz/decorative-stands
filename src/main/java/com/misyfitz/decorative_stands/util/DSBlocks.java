@@ -1,11 +1,14 @@
-package com.misyfitz.decorative_stands;
+package com.misyfitz.decorative_stands.util;
+
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import com.misyfitz.decorative_stands.DecorativeStands;
 import com.misyfitz.decorative_stands.content.block.BinocularStandBlock;
+import com.misyfitz.decorative_stands.content.block.DummyStandBlock;
 import com.misyfitz.decorative_stands.content.block.SpyglassStandBlock;
 
 import net.minecraft.world.item.BlockItem;
@@ -36,6 +39,9 @@ public class DSBlocks {
     public static final RegistryObject<Block> BINOCULAR_STAND = registerBlock("binocular_stand",
             () -> new BinocularStandBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
 
+    public static final RegistryObject<Block> DUMMY_STAND = registerBlock("dummy_stand",
+            () -> new DummyStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+    
     // Dynamic variants of Spyglass Stand (e.g., for each log type)
     public static final Map<String, RegistryObject<Block>> SPYGLASS_STANDS = new HashMap<>();
 

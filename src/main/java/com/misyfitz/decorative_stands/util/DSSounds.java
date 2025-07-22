@@ -1,4 +1,6 @@
-package com.misyfitz.decorative_stands;
+package com.misyfitz.decorative_stands.util;
+
+import com.misyfitz.decorative_stands.DecorativeStands;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

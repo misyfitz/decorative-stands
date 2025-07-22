@@ -254,15 +254,21 @@ publishMods {
     type = STABLE
     modLoaders.add("forge")
 
-    //github {
-    //    accessToken = secrets["GITHUB_TOKEN"]
-    //    repository = "misyfitz/decorative-stands"
-    //    commitish = "1.20.1"
-    //}
+/*    github {
+        accessToken = secrets["GITHUB_TOKEN"]
+        repository = "misyfitz/decorative-stands"
+        commitish = "1.20.1"
+    }*/
 
-    //curseforge {
-    //    accessToken = secrets["CURSEFORGE_TOKEN"]
-    //    projectId = "1304159"
-    //    minecraftVersions.add(minecraft_version)
-    //}
+/*    curseforge {
+        accessToken = secrets["CURSEFORGE_TOKEN"]
+        projectId = "1304159"
+        minecraftVersions.add(minecraft_version)
+    }*/
+    
+        modrinth {
+        accessToken = secrets["MODRINTH_TOKEN"]
+        projectId = "MsUYOV2p"
+        minecraftVersions.add(minecraft_version)
+    }
 }

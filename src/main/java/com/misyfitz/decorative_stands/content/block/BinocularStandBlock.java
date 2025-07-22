@@ -2,15 +2,14 @@ package com.misyfitz.decorative_stands.content.block;
 
 import javax.annotation.Nullable;
 
-import com.misyfitz.decorative_stands.DSBlockEntities;
 import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.client.ScopeOverlay;
 import com.misyfitz.decorative_stands.content.block.entity.BinocularStandBlockEntity;
+import com.misyfitz.decorative_stands.util.DSBlockEntities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -73,7 +72,6 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
     	pBuilder.add(FACING);
     }
     
-    @SuppressWarnings("removal")
 	@Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 

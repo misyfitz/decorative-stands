@@ -2,9 +2,9 @@ package com.misyfitz.decorative_stands.content.block;
 
 import javax.annotation.Nullable;
 
-import com.misyfitz.decorative_stands.DSBlockEntities;
 import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.content.block.entity.SpyglassStandBlockEntity;
+import com.misyfitz.decorative_stands.util.DSBlockEntities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -26,19 +26,24 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SpyglassStandBlock extends HorizontalDirectionalBlock implements EntityBlock {
 	
-	public static final VoxelShape SHAPE = Block.box(2,0,2,14,16,14);
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	// Lower base: full from y=0 to y=32 (2 blocks tall)
+	private static final VoxelShape BASE = Block.box(2, 0, 2, 14, 2, 14);
 
-	//public static final MapCodec<SpyglassStandBlock> CODEC = simpleCodec(SpyglassStandBlock::new);
+	// Upper tube: centered, narrower (e.g. 4x4), from y=32 to y=48
+	private static final VoxelShape TUBE = Block.box(6, 2, 6, 10, 16, 10);
+
+	// Combined shape
+	public static final VoxelShape SHAPE = Shapes.or(BASE, TUBE);
+
+
 
 	public SpyglassStandBlock(Properties pProperties) {
 		super(pProperties);
@@ -55,7 +60,7 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
 	public RenderShape getRenderShape(BlockState state) {
 	    Minecraft mc = Minecraft.getInstance();
 	    if (mc.player != null && mc.level != null && ClientZoomHandler.isZooming()) {
-		    System.out.println("NOT visible");
+		    //System.out.println("NOT visible");
 	    	return RenderShape.INVISIBLE;
 	    }
 

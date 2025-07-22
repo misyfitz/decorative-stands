@@ -61,7 +61,7 @@ public class BinocularItem extends Item {
     }
 
     private void stopUsing(LivingEntity pUser) {
-        pUser.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
+
     }
 
     @Override

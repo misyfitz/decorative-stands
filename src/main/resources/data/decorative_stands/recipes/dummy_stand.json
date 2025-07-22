@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "pattern": [
+    "I I",
+    " I ",
+    "I I"
+  ],
+  "result": {
+    "item": "decorative_stands:dummy_stand"
+  },
+  "show_notification": true
+}

@@ -3,6 +3,7 @@ package com.misyfitz.decorative_stands.content.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-public abstract class AbstractStandBlockEntity extends BlockEntity {
+public abstract class AbstractStandBlockEntity extends BlockEntity implements MenuProvider {
 
     protected int time;
     protected float rot, oRot, tRot;

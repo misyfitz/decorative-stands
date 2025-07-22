@@ -1,4 +1,6 @@
-package com.misyfitz.decorative_stands;
+package com.misyfitz.decorative_stands.util;
+
+import com.misyfitz.decorative_stands.DecorativeStands;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -21,6 +23,7 @@ public class DSCreativeTabs {
                 //blocks
                 //output.accept(DSBlocks.SPYGLASS_STAND.get());
                 output.accept(DSBlocks.BINOCULAR_STAND.get());
+                output.accept(DSBlocks.DUMMY_STAND.get());
                 // Add all spyglass stand variants to the creative tab
                 DSBlocks.LOG_TYPES.forEach(type ->
                 output.accept(DSBlocks.SPYGLASS_STANDS.get(type).get())

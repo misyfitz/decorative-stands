@@ -1,10 +1,9 @@
 package com.misyfitz.decorative_stands.content.block.entity.renderer;
 
-import com.misyfitz.decorative_stands.DSItems;
 import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.content.block.BinocularStandBlock;
 import com.misyfitz.decorative_stands.content.block.entity.BinocularStandBlockEntity;
-
+import com.misyfitz.decorative_stands.util.DSItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
@@ -25,7 +24,8 @@ public class BinocularStandBlockEntityRenderer implements BlockEntityRenderer<Bi
 
     public BinocularStandBlockEntityRenderer(BlockEntityRendererProvider.Context context) {}
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public void render(BinocularStandBlockEntity blockEntity, float partialTicks, PoseStack poseStack,
                        MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 
@@ -67,7 +67,6 @@ public class BinocularStandBlockEntityRenderer implements BlockEntityRenderer<Bi
                 double localZ = lookVec.x * sin + lookVec.z * cos;
                 double localY = lookVec.y;
 
-                @SuppressWarnings("unused")
 				float zDegrees = (float) Math.toDegrees(localZ);
                 float xDegrees = (float) Math.toDegrees(localX);
                 float yDegrees = -(float) Math.toDegrees(localY);

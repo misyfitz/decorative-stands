@@ -4,8 +4,8 @@ import java.util.concurrent.CompletableFuture;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.misyfitz.decorative_stands.DSBlocks;
 import com.misyfitz.decorative_stands.DecorativeStands;
+import com.misyfitz.decorative_stands.util.DSBlocks;
 
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -24,8 +24,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 	    this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 	        .add(DSBlocks.BINOCULAR_STAND.get());
 
-	    //this.tag(BlockTags.MINEABLE_WITH_AXE)
-	        //.add(DSBlocks.SPYGLASS_STAND.get());
+	    this.tag(BlockTags.MINEABLE_WITH_AXE)
+	        .add(DSBlocks.DUMMY_STAND.get());
 
 	    DSBlocks.SPYGLASS_STANDS.values().forEach(entry ->
 	        this.tag(BlockTags.MINEABLE_WITH_AXE).add(entry.get())

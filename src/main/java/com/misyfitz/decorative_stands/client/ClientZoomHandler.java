@@ -6,14 +6,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,7 +48,6 @@ public class ClientZoomHandler {
         startCustomZoom(null, 0.1F, ratio, texture);
     }
     
-    @SuppressWarnings("removal")
 	public static void startCustomZoom(BlockPos pos) {
         startCustomZoom(pos, 0.1F, 1.0F, ScopeOverlay.SPYGLASS_SCOPE);
     }
@@ -140,6 +137,7 @@ public class ClientZoomHandler {
                     || mc.options.keyRight.isDown()
                     || mc.options.keyUp.isDown()
                     || mc.options.keyDown.isDown()) {
+                    mc.player.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
                     stopZoom();
                     return;
                 }
@@ -147,6 +145,7 @@ public class ClientZoomHandler {
             case 1 -> {
                 boolean changedItem = !ItemStack.isSameItemSameTags(zoomItem, mc.player.getMainHandItem());
                 if (mc.options.keyShift.isDown() || changedItem) {
+                    mc.player.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
                     stopZoom();
                     return;
                 }
@@ -176,6 +175,13 @@ public class ClientZoomHandler {
         }
     }
 
+    @SubscribeEvent
+    public static void onRenderHand(RenderHandEvent event) {
+        if (isZooming) {
+            event.setCanceled(true); // Prevent hand rendering entirely
+        }
+    }
+    
     // --- Accessors ---
     @Nullable
     public static BlockPos getZoomedBlockPos() {

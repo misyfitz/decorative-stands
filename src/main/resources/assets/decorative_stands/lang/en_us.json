@@ -1,6 +1,7 @@
 {
   "block.decorative_stands.spyglass_stand": "Spyglass Stand",
   "block.decorative_stands.binocular_stand": "Binocular Stand",
+  "block.decorative_stands.dummy_stand": "Dummy Stand",
   "item.decorative_stands.binocular": "Binocular",
   "itemGroup.decorative_stands.main": "Decorative Stands",
   "tooltip.decorative_stands.microphone.tooltip": "Records sound",

@@ -28,7 +28,7 @@ public class SpyglassStandBlockEntityRenderer implements BlockEntityRenderer<Spy
     private final SpyglassTubeModel tubeModel;
 	
     public SpyglassStandBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        this.tubeModel = new SpyglassTubeModel(context.bakeLayer(SpyglassTubeModel.LAYER_LOCATION));
+        this.tubeModel = new SpyglassTubeModel(context.bakeLayer(SpyglassTubeModel.SPYTUBE_LAYER));
     }
     
     @SuppressWarnings({ "unused", "removal" })

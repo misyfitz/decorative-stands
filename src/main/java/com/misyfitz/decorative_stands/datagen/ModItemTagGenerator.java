@@ -4,8 +4,8 @@ import java.util.concurrent.CompletableFuture;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.misyfitz.decorative_stands.DSBlocks;
 import com.misyfitz.decorative_stands.DecorativeStands;
+import com.misyfitz.decorative_stands.util.DSBlocks;
 import com.misyfitz.decorative_stands.util.DSTags;
 
 import net.minecraft.core.HolderLookup.Provider;
@@ -27,7 +27,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
 	    // Add the Binocular Stand block as item
 	    this.tag(DSTags.Items.STANDS)
-	        .add(DSBlocks.BINOCULAR_STAND.get().asItem());
+	        .add(DSBlocks.BINOCULAR_STAND.get().asItem())
+	    	.add(DSBlocks.DUMMY_STAND.get().asItem());
 
 	    // Add all spyglass stand variants as items
 	    DSBlocks.SPYGLASS_STANDS.values().forEach(entry -> {

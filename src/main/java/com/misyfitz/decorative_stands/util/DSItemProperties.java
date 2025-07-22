@@ -1,6 +1,5 @@
 package com.misyfitz.decorative_stands.util;
 
-import com.misyfitz.decorative_stands.DSItems;
 import com.misyfitz.decorative_stands.DecorativeStands;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;

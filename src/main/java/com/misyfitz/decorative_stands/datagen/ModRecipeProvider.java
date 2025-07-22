@@ -2,9 +2,9 @@ package com.misyfitz.decorative_stands.datagen;
 
 import java.util.function.Consumer;
 
-import com.misyfitz.decorative_stands.DSBlocks;
-import com.misyfitz.decorative_stands.DSItems;
 import com.misyfitz.decorative_stands.DecorativeStands;
+import com.misyfitz.decorative_stands.util.DSBlocks;
+import com.misyfitz.decorative_stands.util.DSItems;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -44,6 +44,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 			.define('I', Items.IRON_INGOT)
 			.define('A', Items.AMETHYST_SHARD)
 			.unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Items.AMETHYST_SHARD))
+			.save(pWriter);
+		
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DSBlocks.DUMMY_STAND.get())
+			.pattern("I I")
+			.pattern(" I ")
+			.pattern("I I")
+			.define('I', Items.OAK_PLANKS)
+			.unlockedBy(getHasName(Items.OAK_PLANKS), has(Items.OAK_PLANKS))
 			.save(pWriter);
 
 		// Generate shaped recipe for each spyglass stand variant
