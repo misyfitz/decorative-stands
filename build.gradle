@@ -266,9 +266,9 @@ publishMods {
         minecraftVersions.add(minecraft_version)
     }*/
     
-        modrinth {
+/*        modrinth {
         accessToken = secrets["MODRINTH_TOKEN"]
         projectId = "MsUYOV2p"
         minecraftVersions.add(minecraft_version)
-    }
+    }*/
 }
