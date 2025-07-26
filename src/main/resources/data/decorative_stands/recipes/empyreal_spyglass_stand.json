@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:spyglass"
+    },
+    "W": {
+      "item": "biomesoplenty:stripped_empyreal_log"
+    }
+  },
+  "pattern": [
+    " S ",
+    " W ",
+    "WWW"
+  ],
+  "result": {
+    "item": "decorative_stands:spyglass_stand_empyreal"
+  },
+  "show_notification": true
+}

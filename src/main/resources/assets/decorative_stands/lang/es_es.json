@@ -1,0 +1,33 @@
+{
+  "block.decorative_stands.spyglass_stand": "Soporte de catalejo",
+  "block.decorative_stands.binocular_stand": "Soporte de binoculares",
+  "block.decorative_stands.dummy_stand": "Soporte de maniquí",
+  "item.decorative_stands.binocular": "Binoculares",
+  "itemGroup.decorative_stands.main": "Soportes decorativos",
+
+  "block.decorative_stands.spyglass_stand_acacia": "Soporte de catalejo de acacia",
+  "block.decorative_stands.spyglass_stand_bamboo": "Soporte de catalejo de bambú",
+  "block.decorative_stands.spyglass_stand_birch": "Soporte de catalejo de abedul",
+  "block.decorative_stands.spyglass_stand_cherry": "Soporte de catalejo de cerezo",
+  "block.decorative_stands.spyglass_stand_dark_oak": "Soporte de catalejo de roble oscuro",
+  "block.decorative_stands.spyglass_stand_jungle": "Soporte de catalejo de jungla",
+  "block.decorative_stands.spyglass_stand_mangrove": "Soporte de catalejo de mangle",
+  "block.decorative_stands.spyglass_stand_oak": "Soporte de catalejo de roble",
+  "block.decorative_stands.spyglass_stand_spruce": "Soporte de catalejo de abeto",
+  "block.decorative_stands.spyglass_stand_crimson": "Soporte de catalejo carmesí",
+  "block.decorative_stands.spyglass_stand_warped": "Soporte de catalejo distorsionado",
+
+  "block.decorative_stands.spyglass_stand_fir": "Soporte de catalejo de abeto blanco",
+  "block.decorative_stands.spyglass_stand_pine": "Soporte de catalejo de pino",
+  "block.decorative_stands.spyglass_stand_maple": "Soporte de catalejo de arce",
+  "block.decorative_stands.spyglass_stand_redwood": "Soporte de catalejo de secuoya",
+  "block.decorative_stands.spyglass_stand_mahogany": "Soporte de catalejo de caoba",
+  "block.decorative_stands.spyglass_stand_jacaranda": "Soporte de catalejo de jacarandá",
+  "block.decorative_stands.spyglass_stand_palm": "Soporte de catalejo de palma",
+  "block.decorative_stands.spyglass_stand_willow": "Soporte de catalejo de sauce",
+  "block.decorative_stands.spyglass_stand_dead": "Soporte de catalejo seco",
+  "block.decorative_stands.spyglass_stand_magic": "Soporte de catalejo mágico",
+  "block.decorative_stands.spyglass_stand_umbran": "Soporte de catalejo sombrío",
+  "block.decorative_stands.spyglass_stand_hellbark": "Soporte de catalejo infernal",
+  "block.decorative_stands.spyglass_stand_empyreal": "Soporte de catalejo empíreo"
+}

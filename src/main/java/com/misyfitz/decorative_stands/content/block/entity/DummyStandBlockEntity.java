@@ -22,10 +22,22 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
+
 import java.util.UUID;
 
 public class DummyStandBlockEntity extends BlockEntity {
 
+	private String playerSkinName;
+
+	public void setPlayerSkinName(String name) {
+	    this.playerSkinName = name;
+	    setChanged();
+	}
+
+	public String getCustomNameFromPlacedBlock() {
+	    return playerSkinName;
+	}
+	
     private final ItemStackHandler inventory = new ItemStackHandler(6) {
         @Override
         public int getSlotLimit(int slot) {
@@ -99,6 +111,39 @@ public class DummyStandBlockEntity extends BlockEntity {
 
                 // Move to position and spawn
                 dummy.moveTo(worldPosition.getX() + 0.5, worldPosition.getY(), worldPosition.getZ() + 0.5);
+                
+                // === Try get player skin by block custom name ===
+//                String customName = getCustomNameFromPlacedBlock();
+//                if (customName != null && customName.matches("^[a-zA-Z0-9_]{3,16}$")) {
+//                	MinecraftServer minecraftServer = level.getServer();
+//                	GameProfileCache cache = minecraftServer.getProfileCache();
+//                	Optional<GameProfile> maybeProfile = cache.get(customName);
+//
+//                	maybeProfile.ifPresent(profile -> {
+//                	    minecraftServer.getProfileRepository().findProfileByName(profile.getName(), result -> {
+//                	        if (result.isPresent()) {
+//                	            GameProfile filled = result.get();
+//                	            Property textures = filled.getProperties().get("textures").stream().findFirst().orElse(null);
+//                	            if (textures != null) {
+//                	                dummy.setSkinTexture(filled); // You’ll need to handle ResourceLocation conversion
+//                	            }
+//                	        }
+//                	    }, MinecraftServer::submit);
+//                	});
+//
+//                    maybeProfile.ifPresent(profile -> {
+//                        // This triggers the skin texture to be loaded
+//                    	GameProfile filled = minecraftServer.getProfileCache().get(customName).orElse(null);
+//
+//                        Property textures = filled.getProperties().get("textures").stream().findFirst().orElse(null);
+//                        if (textures != null) {
+//                            dummy.setSkinTexture(filled); // Or extract texture and use setSkinTexture()
+//                        }
+//                    });
+//                }
+                
+                
+                // Spawn and store
                 server.addFreshEntity(dummy);
                 setDummyEntity(dummy);
             }
@@ -134,14 +179,17 @@ public class DummyStandBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         if (dummyEntityUUID != null) tag.putUUID("DummyUUID", dummyEntityUUID);
+	    if (playerSkinName != null) { tag.putString("PlayerSkinName", playerSkinName); }
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         if (tag.hasUUID("DummyUUID")) dummyEntityUUID = tag.getUUID("DummyUUID");
+	    if (tag.contains("PlayerSkinName")) { playerSkinName = tag.getString("PlayerSkinName"); }
     }
 
+    
 //    @Override
 //    public CompoundTag getUpdateTag() {
 //        CompoundTag tag = super.getUpdateTag();

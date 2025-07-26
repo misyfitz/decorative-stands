@@ -20,6 +20,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Static stand blocks
         dropSelf(DSBlocks.BINOCULAR_STAND.get());
         dropSelf(DSBlocks.DUMMY_STAND.get());
+        dropSelf(DSBlocks.WEAPON_STAND.get());
+
 
         // Dynamic spyglass stand variants
         DSBlocks.SPYGLASS_STANDS.values().forEach(stand -> dropSelf(stand.get()));

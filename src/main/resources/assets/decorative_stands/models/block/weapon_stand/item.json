@@ -1,0 +1,7 @@
+{
+	"parent": "decorative_stands:item/weapon_stand",
+	 "textures": {
+	   "0": "decorative_stands:block/weapon_stand",
+	   "particles": "decorative_stands:block/weapon_stand"
+	 }
+}

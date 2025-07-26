@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=north,merge_type=single":  { "model": "decorative_stands:block/weapon_stand/single", "y": 0 },
+    "facing=south,merge_type=single":  { "model": "decorative_stands:block/weapon_stand/single", "y": 180 },
+    "facing=west,merge_type=single":   { "model": "decorative_stands:block/weapon_stand/single", "y": 270 },
+    "facing=east,merge_type=single":   { "model": "decorative_stands:block/weapon_stand/single", "y": 90 },
+
+    "facing=north,merge_type=left":    { "model": "decorative_stands:block/weapon_stand/left", "y": 0 },
+    "facing=south,merge_type=left":    { "model": "decorative_stands:block/weapon_stand/left", "y": 180 },
+    "facing=west,merge_type=left":     { "model": "decorative_stands:block/weapon_stand/left", "y": 270 },
+    "facing=east,merge_type=left":     { "model": "decorative_stands:block/weapon_stand/left", "y": 90 },
+
+    "facing=north,merge_type=right":   { "model": "decorative_stands:block/weapon_stand/right", "y": 0 },
+    "facing=south,merge_type=right":   { "model": "decorative_stands:block/weapon_stand/right", "y": 180 },
+    "facing=west,merge_type=right":    { "model": "decorative_stands:block/weapon_stand/right", "y": 270 },
+    "facing=east,merge_type=right":    { "model": "decorative_stands:block/weapon_stand/right", "y": 90 }
+  }
+}

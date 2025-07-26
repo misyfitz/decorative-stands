@@ -25,7 +25,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 	        .add(DSBlocks.BINOCULAR_STAND.get());
 
 	    this.tag(BlockTags.MINEABLE_WITH_AXE)
-	        .add(DSBlocks.DUMMY_STAND.get());
+	        .add(DSBlocks.DUMMY_STAND.get())
+	    	.add(DSBlocks.WEAPON_STAND.get());
 
 	    DSBlocks.SPYGLASS_STANDS.values().forEach(entry ->
 	        this.tag(BlockTags.MINEABLE_WITH_AXE).add(entry.get())

@@ -28,7 +28,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 	    // Add the Binocular Stand block as item
 	    this.tag(DSTags.Items.STANDS)
 	        .add(DSBlocks.BINOCULAR_STAND.get().asItem())
-	    	.add(DSBlocks.DUMMY_STAND.get().asItem());
+	    	.add(DSBlocks.DUMMY_STAND.get().asItem())
+	    	.add(DSBlocks.WEAPON_STAND.get().asItem());
 
 	    // Add all spyglass stand variants as items
 	    DSBlocks.SPYGLASS_STANDS.values().forEach(entry -> {
@@ -39,6 +40,4 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 	    this.tag(DSTags.Items.STANDS)
 	        .add(Items.ARMOR_STAND);
 	}
-
-	
 }

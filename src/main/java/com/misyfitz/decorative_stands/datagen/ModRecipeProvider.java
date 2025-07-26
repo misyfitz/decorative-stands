@@ -14,7 +14,6 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 
@@ -24,7 +23,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		super(pOutput);
 	}
 
-	@SuppressWarnings({ "removal", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	@Override
 	protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
 		//shaped
@@ -55,20 +54,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 			.save(pWriter);
 
 		// Generate shaped recipe for each spyglass stand variant
-		DSBlocks.LOG_TYPES.forEach(type -> {
-		    var block = DSBlocks.SPYGLASS_STANDS.get(type);
-		    Item logItem;
+		
+		DSBlocks.LOG_TYPES.forEach(data -> {
+		    var block = DSBlocks.SPYGLASS_STANDS.get(data.type());
+		    Item logItem = BuiltInRegistries.ITEM.get(data.itemId());
 
-		    switch (type) {
-		        case "crimson" -> logItem = Items.STRIPPED_CRIMSON_STEM;
-		        case "warped" -> logItem = Items.STRIPPED_WARPED_STEM;
-		        default -> {
-		            var resLoc = new ResourceLocation("minecraft", "stripped_" + type + "_log");
-		            logItem = BuiltInRegistries.ITEM.get(resLoc);
-		            if (logItem == Items.AIR) {
-		                throw new IllegalArgumentException("Missing log item: " + resLoc);
-		            }
-		        }
+		    if (logItem == Items.AIR) {
+		        throw new IllegalArgumentException("Missing log item: " + data.itemId());
 		    }
 
 		    ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, block.get())
@@ -77,8 +69,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		        .pattern("WWW")
 		        .define('S', Items.SPYGLASS)
 		        .define('W', logItem)
-		        .unlockedBy(getHasName(Items.SPYGLASS), has(Items.SPYGLASS))
-		        .save(pWriter, DecorativeStands.MODID + ":" + type + "_spyglass_stand");
+		        .unlockedBy(RecipeProvider.getHasName(Items.SPYGLASS), RecipeProvider.has(Items.SPYGLASS))
+		        .save(pWriter, DecorativeStands.MODID + ":" + data.type() + "_spyglass_stand");
 		});
 
 		// Generic recipe using forge:stripped_logs
@@ -87,7 +79,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		    .pattern(" W ")
 		    .pattern("WWW")
 		    .define('S', Items.SPYGLASS)
-		    .define('W', ItemTags.create(new ResourceLocation("forge", "stripped_logs")))
+		    .define('W', ItemTags.LOGS)
 		    .unlockedBy(getHasName(Items.SPYGLASS), has(Items.SPYGLASS))
 		    .save(pWriter, DecorativeStands.MODID + ":spyglass_stand_from_any_log");
 		

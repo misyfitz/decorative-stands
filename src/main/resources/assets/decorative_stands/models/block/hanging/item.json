@@ -1,0 +1,7 @@
+{
+	"parent": "decorative_stands:item/weapon_stand",
+	 "textures": {
+	   "0": "minecraft:block/stripped_oak_log",
+	   "particles": "minecraft:block/stripped_oak_log"
+	 }
+}

@@ -6,6 +6,7 @@ import com.misyfitz.decorative_stands.DecorativeStands;
 import com.misyfitz.decorative_stands.content.block.entity.BinocularStandBlockEntity;
 import com.misyfitz.decorative_stands.content.block.entity.DummyStandBlockEntity;
 import com.misyfitz.decorative_stands.content.block.entity.SpyglassStandBlockEntity;
+import com.misyfitz.decorative_stands.content.block.entity.WeaponStandBlockEntity;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -31,11 +32,13 @@ public class DSBlockEntities {
 				).build(null);
 			});
 
-
-	
 	public static final RegistryObject<BlockEntityType<BinocularStandBlockEntity>> BINOCULAR_STAND_BE =
 			BLOCK_ENTITIES.register("binocular_stand_be", () -> BlockEntityType.Builder.of(
 					BinocularStandBlockEntity::new, DSBlocks.BINOCULAR_STAND.get()).build(null));
+	
+	public static final RegistryObject<BlockEntityType<WeaponStandBlockEntity>> WEAPON_STAND_BE =
+			BLOCK_ENTITIES.register("weapon_stand_be", () -> BlockEntityType.Builder.of(
+					WeaponStandBlockEntity::new, DSBlocks.WEAPON_STAND.get()).build(null));
 	
 	public static final RegistryObject<BlockEntityType<DummyStandBlockEntity>> DUMMY_STAND_BE =
 			BLOCK_ENTITIES.register("dummy_stand_be", () -> BlockEntityType.Builder.of(

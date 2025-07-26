@@ -22,11 +22,12 @@ public class DSCreativeTabs {
                 output.accept(DSItems.BINOCULAR.get());
                 //blocks
                 //output.accept(DSBlocks.SPYGLASS_STAND.get());
+                output.accept(DSBlocks.WEAPON_STAND.get());
                 output.accept(DSBlocks.BINOCULAR_STAND.get());
                 output.accept(DSBlocks.DUMMY_STAND.get());
                 // Add all spyglass stand variants to the creative tab
-                DSBlocks.LOG_TYPES.forEach(type ->
-                output.accept(DSBlocks.SPYGLASS_STANDS.get(type).get())
+                DSBlocks.LOG_TYPES.forEach(data ->
+                output.accept(DSBlocks.SPYGLASS_STANDS.get(data.type()).get())
             );}).build());
 
     public static void register(IEventBus modEventBus) {

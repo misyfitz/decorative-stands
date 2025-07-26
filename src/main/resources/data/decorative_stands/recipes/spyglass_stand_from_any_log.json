@@ -6,7 +6,7 @@
       "item": "minecraft:spyglass"
     },
     "W": {
-      "tag": "forge:stripped_logs"
+      "tag": "minecraft:logs"
     }
   },
   "pattern": [

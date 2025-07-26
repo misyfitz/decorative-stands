@@ -1,6 +1,7 @@
 package com.misyfitz.decorative_stands.content.entity.renderer;
 
 import com.misyfitz.decorative_stands.client.model.DummyModel;
+
 import com.misyfitz.decorative_stands.content.entity.DummyEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -15,8 +16,7 @@ import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 
 
 public class DummyEntityRenderer extends LivingEntityRenderer<DummyEntity, HumanoidModel<DummyEntity>> {
-    @SuppressWarnings("removal")
-	private static final ResourceLocation DUMMY_TEXTURE = new ResourceLocation("decorative_stands", "textures/entity/dummy.png");
+    private static ResourceLocation DUMMY_TEXTURE = null;
 
     public DummyEntityRenderer(Context context) {
         super(context, new DummyModel<>(context.bakeLayer(DummyModel.DUMMY_LAYER)), 0f);
@@ -30,10 +30,21 @@ public class DummyEntityRenderer extends LivingEntityRenderer<DummyEntity, Human
 
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
     }
-
+    
+    
+    
     @Override
     public void render(DummyEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    	
+//    	SkinManager skinManager = Minecraft.getInstance().getSkinManager();
+//    	skinManager.registerSkins(profile, (type, location, skin) -> {
+//    	    if (type == MinecraftProfileTexture.Type.SKIN) {
+//    	        this.textureLocation = location; // store it for rendering
+//    	    }
+//    	}, true);
+
         // ( 0.0625 = 1 pixel)
+    	DUMMY_TEXTURE  = entity.getSkinTexture();
         poseStack.pushPose();
         poseStack.translate(0.0D, 0.1250D, 0.0D); // y = upward
 
