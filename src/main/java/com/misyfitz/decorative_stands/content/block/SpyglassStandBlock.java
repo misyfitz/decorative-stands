@@ -6,7 +6,6 @@ import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.content.block.entity.SpyglassStandBlockEntity;
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;

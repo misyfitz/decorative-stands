@@ -11,45 +11,42 @@ Thumbs.db
 .gradle/
 build/
 run-data/
-out/
-secrets.properties
-
-!gradle/wrapper/gradle-wrapper.jar
-
-# === IDEs ===
-
-# Eclipse
-.project
-.eclipse/
-.classpath
-.settings/
-.metadata/
-bin/
-
-# IntelliJ IDEA
-.idea/
-*.iml
-*.iws
-
-# VS Code (if used)
-.vscode/
-
-# === Forge Specific ===
 run/
-generated/
 runClient/
 runServer/
 runGameTestServer/
 runData/
 debug/
 logs/
-eclipse/
-runClient.launch
-runServer.launch
-runData.launch
-runGameTestServer.launch
+out/
+dist/
+.cache/
+secrets.properties
 
-# === MDK Forge Files (you may keep them if you modify them)
+# === Generated Data ===
+**/generated/
+
+# === Forge Specific ===
+eclipse/
+*.launch
+
+# === IDEs ===
+# Eclipse
+.project
+.classpath
+.settings/
+.metadata/
+bin/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# VS Code
+.vscode/
+
+# === MDK Files ===
 forge*changelog.txt
 CREDITS.txt
 LICENSE.txt
@@ -62,9 +59,5 @@ LICENSE.txt
 *.pid
 *.orig
 
-# === Cache / CI ===
-/.cache/
-/dist/
-/build/libs/
-/build/tmp/
-/build/reports/
+# === Local Repo Cache (if exists)
+mcmodsrepo/

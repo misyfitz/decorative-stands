@@ -104,6 +104,7 @@
     "decorative_stands:spyglass_stand_dark_oak",
     "decorative_stands:spyglass_stand_jungle",
     "decorative_stands:spyglass_stand_spruce",
+	"decorative_stands:weapon_stand",
     "minecraft:armor_stand"
   ]
 }
