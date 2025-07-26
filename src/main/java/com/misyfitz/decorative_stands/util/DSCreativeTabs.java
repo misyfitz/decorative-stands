@@ -22,7 +22,7 @@ public class DSCreativeTabs {
                 output.accept(DSItems.BINOCULAR.get());
                 //blocks
                 //output.accept(DSBlocks.SPYGLASS_STAND.get());
-                output.accept(DSBlocks.WEAPON_STAND.get());
+                //output.accept(DSBlocks.WEAPON_STAND.get());
                 output.accept(DSBlocks.BINOCULAR_STAND.get());
                 output.accept(DSBlocks.DUMMY_STAND.get());
                 // Add all spyglass stand variants to the creative tab

@@ -91,6 +91,7 @@
 	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
 	  ]
 	},
+	"decorative_stands:weapon_stand",
     "decorative_stands:dummy_stand",
     "decorative_stands:spyglass_stand_cherry",
     "decorative_stands:spyglass_stand_birch",
