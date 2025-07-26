@@ -2,17 +2,19 @@ package com.misyfitz.decorative_stands.content.entity;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.UUID;
 
 import com.misyfitz.decorative_stands.content.screen.DummyEntityMenu;
-//import com.misyfitz.decorative_stands.content.screen.DummyMenu;
 import com.misyfitz.decorative_stands.util.DSBlocks;
 import com.misyfitz.decorative_stands.util.DSUtils;
+import com.mojang.authlib.GameProfile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -52,6 +54,34 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
 
     private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY); // HEAD, CHEST, LEGS, FEET
     private final NonNullList<ItemStack> handItems = NonNullList.withSize(2, ItemStack.EMPTY);  // MAIN, OFFHAND
+    
+    @SuppressWarnings("removal")
+	private ResourceLocation skinTexture = new ResourceLocation("decorative_stands", "textures/entity/dummy.png");
+    
+    public ResourceLocation getSkinTexture() {
+        return skinTexture;
+    }
+    
+    public void setSkinTexture(ResourceLocation texture) {
+        this.skinTexture = texture;
+    }
+    
+    private GameProfile skinProfile;
+    private UUID skinUUID;
+
+    public void setSkinProfile(GameProfile profile) {
+        this.skinProfile = profile;
+        this.skinUUID = profile.getId();
+    }
+
+    public UUID getSkinUUID() {
+        return skinUUID;
+    }
+
+    public GameProfile getSkinProfile() {
+        return skinProfile;
+    }
+
     
     Direction facing;
     BlockState blockState;

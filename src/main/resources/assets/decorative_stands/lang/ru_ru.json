@@ -1,0 +1,33 @@
+{
+  "block.decorative_stands.spyglass_stand": "Cтойка для подзорной трубы",
+  "block.decorative_stands.binocular_stand": "Cтойка для бинокля",
+  "block.decorative_stands.dummy_stand": "Манекен",
+  "item.decorative_stands.binocular": "Бинокль",
+  "itemGroup.decorative_stands.main": "Декоративные подставки",
+  
+  "block.decorative_stands.spyglass_stand_acacia": "Акациевая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_bamboo": "Бамбуковая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_birch": "Берёзовая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_cherry": "Вишнёвая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_dark_oak": "Cтойка из тёмного дуба для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_jungle": "Тропическая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_mangrove": "Мангровая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_oak": "Дубовая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_spruce": "Еловая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_crimson": "Багровая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_warped": "Искажённая стойка для подзорной трубы",
+
+  "block.decorative_stands.spyglass_stand_fir": "Пихтовая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_pine": "Сосновая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_maple": "Клёновая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_redwood": "Секвойевая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_mahogany": "Махагоновая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_jacaranda": "Жакарандовая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_palm": "Пальмовая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_willow": "Ивовая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_dead": "Мёртвая стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_magic": "Волшебная стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_umbran": "Умбранская стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_hellbark": "Адская стойка для подзорной трубы",
+  "block.decorative_stands.spyglass_stand_empyreal": "Небесная стойка для подзорной трубы"
+}

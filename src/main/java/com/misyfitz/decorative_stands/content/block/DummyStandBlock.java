@@ -64,6 +64,21 @@ public class DummyStandBlock extends HorizontalDirectionalBlock implements Entit
   
     // --- Placement and State Management ---
 
+//    @Override
+//    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+//        if (!level.isClientSide && stack.hasCustomHoverName()) {
+//            BlockEntity be = level.getBlockEntity(pos);
+//            if (be instanceof DummyStandBlockEntity dummyBE) {
+//                String customName = stack.getHoverName().getString().trim();
+//                String defaultName = Component.translatable("block.decorative_stands.dummy_stand").getString().trim();
+//
+//                if (!customName.equalsIgnoreCase(defaultName)) {
+//                    dummyBE.setPlayerSkinName(customName); // trigger later skin fetch
+//                }
+//            }
+//        }
+//    }
+    
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));

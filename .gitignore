@@ -36,6 +36,7 @@ bin/
 
 # === Forge Specific ===
 run/
+generated/
 runClient/
 runServer/
 runGameTestServer/

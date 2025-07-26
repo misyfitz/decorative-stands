@@ -2,6 +2,7 @@ package com.misyfitz.decorative_stands.datagen;
 
 import com.misyfitz.decorative_stands.DecorativeStands;
 import com.misyfitz.decorative_stands.util.DSBlocks;
+import com.misyfitz.decorative_stands.util.DSBlocks.LogTypeData;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -33,74 +34,43 @@ public class ModBlockStateProvider extends BlockStateProvider {
 	private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
-
+    
     @SuppressWarnings("unused")
 	private void generateSpyglassStandVariants() {
 
-        for (String type : DSBlocks.LOG_TYPES) {
-            String name = "spyglass_stand_" + type;
-            RegistryObject<Block> block = DSBlocks.SPYGLASS_STANDS.get(type); // Ensure this map exists
+        for (LogTypeData data : DSBlocks.LOG_TYPES) {
+            String name = "spyglass_stand_" + data.type();
+            RegistryObject<Block> block = DSBlocks.SPYGLASS_STANDS.get(data.type()); // Ensure this map exists
 
-            // Build model with dynamic texture
-            if (type == "crimson" || type == "warped") {
-            	String texturePath = "minecraft:block/stripped_" + type + "_stem";
-                ModelFile model = models().withExistingParent("block/spyglass_stand/" + type,
-                        modLoc("block/spyglass_stand/block"))
-                        .texture("3", texturePath)
-                        .texture("4", texturePath)
-                        .texture("particle", texturePath);
-                // Build blockstate
-                VariantBlockStateBuilder builder = getVariantBuilder(block.get());
-                builder.forAllStates(state -> {
-                    int yRot = (int) state.getValue(HorizontalDirectionalBlock.FACING).getOpposite().toYRot();
-                    return ConfiguredModel.builder()
-                            .modelFile(model)
-                            .rotationY(yRot)
-                            .build();
-                });
-            } else {
-            	String texturePath = "minecraft:block/stripped_" + type + "_log";
-                ModelFile model = models().withExistingParent("block/spyglass_stand/" + type,
-                        modLoc("block/spyglass_stand/block"))
-                        .texture("3", texturePath)
-                        .texture("4", texturePath)
-                        .texture("particle", texturePath);
-                // Build blockstate
-                VariantBlockStateBuilder builder = getVariantBuilder(block.get());
-                builder.forAllStates(state -> {
-                    int yRot = (int) state.getValue(HorizontalDirectionalBlock.FACING).getOpposite().toYRot();
-                    return ConfiguredModel.builder()
-                            .modelFile(model)
-                            .rotationY(yRot)
-                            .build();
-                });
-            }
+            ModelFile model = models().withExistingParent("block/spyglass_stand/" + data.type(),
+                    modLoc("block/spyglass_stand/block"))
+                    .texture("3", data.texturePath())
+                    .texture("4", data.texturePath())
+                    .texture("particle", data.texturePath());
+            // Build blockstate
+            VariantBlockStateBuilder builder = getVariantBuilder(block.get());
+            builder.forAllStates(state -> {
+                int yRot = (int) state.getValue(HorizontalDirectionalBlock.FACING).getOpposite().toYRot();
+                return ConfiguredModel.builder()
+                        .modelFile(model)
+                        .rotationY(yRot)
+                        .build();
+            });
         }
     }
     
     @SuppressWarnings("unused")
 	private void generateSpyglassStandItemVariants() {
 
-        for (String type : DSBlocks.LOG_TYPES) {
-            String name = "spyglass_stand_" + type;
-            RegistryObject<Block> block = DSBlocks.SPYGLASS_STANDS.get(type); // Ensure this map exists
+        for (LogTypeData data : DSBlocks.LOG_TYPES) {
+            String name = "spyglass_stand_" + data.type();
+            RegistryObject<Block> block = DSBlocks.SPYGLASS_STANDS.get(data.type()); // Ensure this map exists
 
-            // Build model with dynamic texture
-            if (type == "crimson" || type == "warped") {
-            	String texturePath = "minecraft:block/stripped_" + type + "_stem";
-                ModelFile model = models().withExistingParent("block/spyglass_stand/" + type + "_item",
-                        modLoc("block/spyglass_stand/item"))
-                        .texture("3", texturePath)
-                        .texture("4", texturePath)
-                        .texture("particle", texturePath);
-            } else {
-            	String texturePath = "minecraft:block/stripped_" + type + "_log";
-                ModelFile model = models().withExistingParent("block/spyglass_stand/" + type + "_item",
-                        modLoc("block/spyglass_stand/item"))
-                        .texture("3", texturePath)
-                        .texture("4", texturePath)
-                        .texture("particle", texturePath);
-            }
+            ModelFile model = models().withExistingParent("block/spyglass_stand/" + data.type() + "_item",
+                    modLoc("block/spyglass_stand/item"))
+                    .texture("3", data.texturePath())
+                    .texture("4", data.texturePath())
+                    .texture("particle", data.texturePath());
         }
     }
 

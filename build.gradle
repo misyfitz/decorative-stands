@@ -20,6 +20,10 @@ base {
     archivesName = mod_id
 }
 
+configurations {
+    datagenImplementation.extendsFrom compileClasspath
+}
+
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -111,7 +115,16 @@ minecraft {
             workingDirectory project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args(
+            	'--mod', mod_id, 
+            	'--all',
+            	'--existing-mod', 'biomesoplenty',
+            	'--existing', file('src/main/resources/'),
+            	'--output', file('src/generated/resources/')
+            )
+/*            mods {
+            	mod_id { source sourceSets.main }
+        	}*/
         }
     }
 }
@@ -164,6 +177,17 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}"))
     
     runtimeOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
+    
+    // BOP dependencies
+/*    compileOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
+    runtimeOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
+	runtimeOnly(fg.deobf("curse.maven:glitchcore-${glitchcore_project}:${glitchcore_file}"))      // GlitchCore
+	runtimeOnly(fg.deobf("curse.maven:terrablender-${terrablender_project}:${terrableder_file}"))    // TerraBlender
+	datagenImplementation(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))*/
+	
+	//curios api
+/*	compileOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))
+	runtimeOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))*/
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
@@ -186,6 +210,7 @@ tasks.named('processResources', ProcessResources).configure {
             forge_version: forge_version, 
             forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
+            bop_version_range: bop_version_range,
             mod_id: mod_id, 
             mod_name: mod_name, 
             mod_license: mod_license, 

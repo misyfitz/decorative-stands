@@ -7,6 +7,7 @@ import com.misyfitz.decorative_stands.client.model.DummyModel;
 import com.misyfitz.decorative_stands.client.model.SpyglassTubeModel;
 import com.misyfitz.decorative_stands.content.block.entity.renderer.BinocularStandBlockEntityRenderer;
 import com.misyfitz.decorative_stands.content.block.entity.renderer.SpyglassStandBlockEntityRenderer;
+import com.misyfitz.decorative_stands.content.block.entity.renderer.WeaponStandBlockEntityRenderer;
 import com.misyfitz.decorative_stands.content.entity.DummyEntity;
 import com.misyfitz.decorative_stands.content.entity.renderer.DummyEntityRenderer;
 import com.misyfitz.decorative_stands.content.screen.DummyEntityMenuScreen;
@@ -105,6 +106,7 @@ public class DecorativeStands {
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(DSBlockEntities.BINOCULAR_STAND_BE.get(), BinocularStandBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(DSBlockEntities.SPYGLASS_STAND_BE.get(), SpyglassStandBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(DSBlockEntities.WEAPON_STAND_BE.get(), WeaponStandBlockEntityRenderer::new);
 
         }
         

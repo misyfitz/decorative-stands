@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "decorative_stands:block/spyglass_stand/pine",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "decorative_stands:block/spyglass_stand/pine"
+    },
+    "facing=south": {
+      "model": "decorative_stands:block/spyglass_stand/pine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "decorative_stands:block/spyglass_stand/pine",
+      "y": 270
+    }
+  }
+}

@@ -1,16 +1,108 @@
 {
+  "replace": false,	
   "values": [
     "decorative_stands:binocular_stand",
     "decorative_stands:dummy_stand",
+	{
+	  "id": "decorative_stands:spyglass_stand_magic",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_umbran",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_mahogany",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_pine",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_redwood",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_palm",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_dead",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_jacaranda",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_fir",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_hellbark",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_willow",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_empyreal",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
+	{
+	  "id": "decorative_stands:spyglass_stand_maple",
+	  "required": false,
+	  "conditions": [
+	    { "type": "forge:mod_loaded", "modid": "biomesoplenty" }
+	  ]
+	},
     "decorative_stands:spyglass_stand_cherry",
-    "decorative_stands:spyglass_stand_crimson",
     "decorative_stands:spyglass_stand_birch",
+    "decorative_stands:spyglass_stand_mangrove",
+    "decorative_stands:spyglass_stand_crimson",
     "decorative_stands:spyglass_stand_oak",
     "decorative_stands:spyglass_stand_acacia",
     "decorative_stands:spyglass_stand_warped",
     "decorative_stands:spyglass_stand_dark_oak",
     "decorative_stands:spyglass_stand_jungle",
-    "decorative_stands:spyglass_stand_mangrove",
     "decorative_stands:spyglass_stand_spruce",
     "minecraft:armor_stand"
   ]

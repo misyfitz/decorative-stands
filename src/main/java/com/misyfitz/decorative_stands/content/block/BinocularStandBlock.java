@@ -53,10 +53,10 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.player != null && mc.level != null && ClientZoomHandler.isZooming()) {
-            return RenderShape.INVISIBLE;
-        }
+//        Minecraft mc = Minecraft.getInstance();
+//        if (mc.player != null && mc.level != null && ClientZoomHandler.isZooming()) {
+//            return RenderShape.INVISIBLE;
+//        }
 
         return RenderShape.MODEL;
     }
