@@ -81,7 +81,7 @@ public class DummyEntityMenuScreen extends AbstractContainerScreen<DummyEntityMe
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
     	
-        this.renderDirtBackground(guiGraphics); // Updated for 1.20.4
+        this.renderTransparentBackground(guiGraphics); // Updated for 1.20.4
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
