@@ -43,7 +43,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 
-@Mod(DecorativeStands.MODID)
+@Mod("decorative_stands")
 public class DecorativeStands {
 
     public static final String MODID = "decorative_stands";

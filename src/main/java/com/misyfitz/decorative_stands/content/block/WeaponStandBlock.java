@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.misyfitz.decorative_stands.content.block.entity.WeaponStandBlockEntity;
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
+import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,6 +31,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WeaponStandBlock extends HorizontalDirectionalBlock implements EntityBlock{
 
+	
+	public static final MapCodec<WeaponStandBlock> CODEC = simpleCodec(WeaponStandBlock::new);
 	// Lower base: full from y=0 to y=32 (2 blocks tall)
 	private static final VoxelShape BASE = Block.box(2, 0, 2, 14, 2, 14);
 
@@ -44,6 +47,12 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
 		this.registerDefaultState(this.stateDefinition.any()
 			    .setValue(FACING, Direction.NORTH));
 	}
+	
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
+    }
+
 
 	@Override
 	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

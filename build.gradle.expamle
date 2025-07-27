@@ -3,14 +3,6 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.38'
-	id "me.modmuss50.mod-publish-plugin" version "0.8.4"
-}
-
-def secrets = new Properties()
-file("./secrets.properties").withInputStream {
-    stream -> secrets.load(stream)
 }
 
 version = mod_version
@@ -18,10 +10,6 @@ group = mod_group_id
 
 base {
     archivesName = mod_id
-}
-
-configurations {
-    datagenImplementation.extendsFrom compileClasspath
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -85,7 +73,6 @@ minecraft {
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
-
         }
 
         client {
@@ -110,16 +97,7 @@ minecraft {
             workingDirectory project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args(
-            	'--mod', mod_id, 
-            	'--all',
-            	'--existing-mod', 'biomesoplenty',
-            	'--existing', file('src/main/resources/'),
-            	'--output', file('src/generated/resources/')
-            )
-/*            mods {
-            	mod_id { source sourceSets.main }
-        	}*/
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
 }
@@ -128,28 +106,14 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
-    }
-    maven {
-        // location of the maven that hosts JEI files before January 2023
-        name = "Progwml6's maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of the maven that hosts JEI files since January 2023
-        name = "Jared's maven"
-        url = "https://maven.blamejared.com/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven {
-        url "https://cursemaven.com"
-    }
+    // Put repositories for dependencies here
+    // ForgeGradle automatically adds the Forge maven and Maven Central for you
+
+    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
+    // flatDir {
+    //     dir 'libs'
+    // }
 }
 
 dependencies {
@@ -159,26 +123,12 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-	
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime   
-    compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"))
-    compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}"))
-    
-    runtimeOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
-    
-    // BOP dependencies
-    compileOnly (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
-    runtimeOnly (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
-	runtimeOnly (fg.deobf("curse.maven:glitchcore-${glitchcore_project}:${glitchcore_file}"))      // GlitchCore
-	runtimeOnly (fg.deobf("curse.maven:terrablender-${terrablender_project}:${terrableder_file}"))    // TerraBlender
-	datagenImplementation (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))
-	
-	//curios api
-/*	compileOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))
-	runtimeOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))*/
+    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
+    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
@@ -196,18 +146,11 @@ dependencies {
 // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
-            minecraft_version: minecraft_version, 
-            minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, 
-            forge_version_range: forge_version_range,
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
-            bop_version_range: bop_version_range,
-            mod_id: mod_id, 
-            mod_name: mod_name, 
-            mod_license: mod_license, 
-            mod_version: mod_version,
-            mod_authors: mod_authors, 
-            mod_description: mod_description,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description,
     ]
     inputs.properties replaceProperties
 
@@ -220,13 +163,12 @@ tasks.named('processResources', ProcessResources).configure {
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1', // We are version 1 of ourselves
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            'Specification-Title'     : mod_id,
+            'Specification-Vendor'    : mod_authors,
+            'Specification-Version'   : '1', // We are version 1 of ourselves
+            'Implementation-Title'    : project.name,
+            'Implementation-Version'  : project.jar.archiveVersion,
+            'Implementation-Vendor'   : mod_authors
         ])
     }
 
@@ -256,35 +198,24 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
-tasks.withType(ProcessResources).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+// IntelliJ no longer downloads javadocs and sources by default.
+// This tells Gradle to force IDEA to do it.
+idea.module { downloadJavadoc = downloadSources = true }
+
+eclipse {
+    // Run everytime eclipse builds the code
+    //autoBuildTasks genEclipseRuns
+    // Run when importing the project
+    synchronizationTasks 'genEclipseRuns'
 }
-wrapper {
-    gradleVersion = '8.14'
-    distributionType = Wrapper.DistributionType.BIN
-}
 
-publishMods {
-    file = jar.archiveFile
-    changelog = "Check out the changelog at https://github.com/misyfitz/decorative-stands/blob/main/CHANGELOG.md"
-    type = STABLE
-    modLoaders.add("forge")
-
-/*    github {
-        accessToken = secrets["GITHUB_TOKEN"]
-        repository = "misyfitz/decorative-stands"
-        commitish = "1.20.1"
-    }*/
-
-/*    curseforge {
-        accessToken = secrets["CURSEFORGE_TOKEN"]
-        projectId = "1304159"
-        minecraftVersions.add(minecraft_version)
-    }*/
-    
-/*        modrinth {
-        accessToken = secrets["MODRINTH_TOKEN"]
-        projectId = "MsUYOV2p"
-        minecraftVersions.add(minecraft_version)
-    }*/
+// Merge the resources and classes into the same directory. 
+// This is done because java expects modules to be in a single directory.
+// And if we have it in multiple we have to do performance intensive hacks like having the UnionFileSystem
+// This will eventually be migrated to ForgeGradle so modders don't need to manually do it. But that is later.
+sourceSets.each {
+    def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+    it.output.resourcesDir = dir
+    it.java.destinationDirectory = dir
 }

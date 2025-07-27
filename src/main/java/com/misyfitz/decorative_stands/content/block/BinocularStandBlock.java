@@ -6,6 +6,7 @@ import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.client.ScopeOverlay;
 import com.misyfitz.decorative_stands.content.block.entity.BinocularStandBlockEntity;
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
+import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,6 +36,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BinocularStandBlock extends HorizontalDirectionalBlock implements EntityBlock {
 
+	public static final MapCodec<BinocularStandBlock> CODEC = simpleCodec(BinocularStandBlock::new);
+	
     public static final VoxelShape SHAPE = Block.box(6, 0, 6, 10, 24, 10);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -44,6 +47,11 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
         		.setValue(FACING, Direction.NORTH));
         
     }
+    
+	@Override
+	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+		return CODEC;
+	}
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -105,5 +113,7 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 	    return new BinocularStandBlockEntity(pos, state);
 	}
+
+
 
 }

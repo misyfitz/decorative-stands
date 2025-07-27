@@ -12,6 +12,9 @@ loaderVersion="${loader_version_range}" #mandatory This is typically bumped ever
 license="${mod_license}"
 # A URL to refer people to when problems occur with this mod
 #issueTrackerURL="https://github.com/misyfitz/decorative_stands/issues" #optional
+# If your mod is purely client-side and has no multiplayer functionality (be it dedicated servers or Open to LAN),
+# set this to true, and Forge will set the correct displayTest for you and skip loading your mod on dedicated servers.
+#clientSideOnly=true #optional - defaults to false if absent
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
@@ -48,10 +51,13 @@ description='''${mod_description}'''
     mandatory=true #mandatory
     # The version range of the dependency
     versionRange="${forge_version_range}" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the dependency is not mandatory
+    # BEFORE - This mod is loaded BEFORE the dependency
+    # AFTER - This mod is loaded AFTER the dependency
     ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    # Side this dependency is applied on - BOTH, CLIENT, or SERVER
     side="BOTH"
+# Here's another dependency    
 [[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
@@ -59,12 +65,14 @@ description='''${mod_description}'''
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+    
 [[dependencies.decorative_stands]]
     modId="biomesoplenty"
     mandatory=false
     versionRange="${bop_version_range}"
     ordering="AFTER"
     side="BOTH"
+    
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
 # that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
 # stop your mod loading on the server for example.

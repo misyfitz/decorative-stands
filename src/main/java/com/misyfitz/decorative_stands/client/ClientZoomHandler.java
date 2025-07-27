@@ -118,7 +118,8 @@ public class ClientZoomHandler {
 
 
     // --- Forge Events ---
-    @SubscribeEvent
+    @SuppressWarnings("removal")
+	@SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END)
             return;

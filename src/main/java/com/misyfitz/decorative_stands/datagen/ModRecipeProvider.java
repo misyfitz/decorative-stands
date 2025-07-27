@@ -1,7 +1,5 @@
 package com.misyfitz.decorative_stands.datagen;
 
-import java.util.function.Consumer;
-
 import com.misyfitz.decorative_stands.DecorativeStands;
 import com.misyfitz.decorative_stands.util.DSBlocks;
 import com.misyfitz.decorative_stands.util.DSItems;
@@ -10,8 +8,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.ItemTags;
@@ -23,9 +21,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		super(pOutput);
 	}
 
-	@SuppressWarnings({ "deprecation" })
+	
 	@Override
-	protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+	protected void buildRecipes(RecipeOutput pOutput) {
 		//shaped
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DSBlocks.BINOCULAR_STAND.get())
 			.pattern(" B ")
@@ -34,7 +32,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 			.define('S', Items.STONE)
 			.define('B', DSItems.BINOCULAR.get())
 			.unlockedBy(getHasName(DSItems.BINOCULAR.get()), has(DSItems.BINOCULAR.get()))
-			.save(pWriter);
+			.save(pOutput);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, DSItems.BINOCULAR.get())
 			.pattern("I I")
@@ -43,7 +41,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 			.define('I', Items.IRON_INGOT)
 			.define('A', Items.AMETHYST_SHARD)
 			.unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Items.AMETHYST_SHARD))
-			.save(pWriter);
+			.save(pOutput);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DSBlocks.DUMMY_STAND.get())
 			.pattern("I I")
@@ -51,13 +49,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 			.pattern("I I")
 			.define('I', Items.OAK_PLANKS)
 			.unlockedBy(getHasName(Items.OAK_PLANKS), has(Items.OAK_PLANKS))
-			.save(pWriter);
+			.save(pOutput);
 
 		// Generate shaped recipe for each spyglass stand variant
 		
 		DSBlocks.LOG_TYPES.forEach(data -> {
 		    var block = DSBlocks.SPYGLASS_STANDS.get(data.type());
-		    Item logItem = BuiltInRegistries.ITEM.get(data.itemId());
+		    @SuppressWarnings("deprecation")
+			Item logItem = BuiltInRegistries.ITEM.get(data.itemId());
 
 		    if (logItem == Items.AIR) {
 		        throw new IllegalArgumentException("Missing log item: " + data.itemId());
@@ -70,7 +69,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		        .define('S', Items.SPYGLASS)
 		        .define('W', logItem)
 		        .unlockedBy(RecipeProvider.getHasName(Items.SPYGLASS), RecipeProvider.has(Items.SPYGLASS))
-		        .save(pWriter, DecorativeStands.MODID + ":" + data.type() + "_spyglass_stand");
+		        .save(pOutput, DecorativeStands.MODID + ":" + data.type() + "_spyglass_stand");
 		});
 
 		// Generic recipe using forge:stripped_logs
@@ -81,7 +80,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 		    .define('S', Items.SPYGLASS)
 		    .define('W', ItemTags.LOGS)
 		    .unlockedBy(getHasName(Items.SPYGLASS), has(Items.SPYGLASS))
-		    .save(pWriter, DecorativeStands.MODID + ":spyglass_stand_from_any_log");
+		    .save(pOutput, DecorativeStands.MODID + ":spyglass_stand_from_any_log");
 		
 	    /* for newer versions 1.21.1+
 	    var logTypes = java.util.List.of("acacia", "birch", "cherry", "dark_oak", "jungle", "mangrove", "oak", "spruce", "crimson", "warped");
@@ -123,4 +122,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 			.unlockedBy(getHasName(Items.SPYGLASS), has(Items.SPYGLASS))
 			.save(pWriter, CreateAcoustics.MODID+":dark_oak_spyglass_stand");*/
 	}
+
+
+
 }
