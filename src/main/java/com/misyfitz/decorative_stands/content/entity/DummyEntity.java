@@ -21,7 +21,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -348,17 +347,19 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     }
 
     public void openMenu(ServerPlayer player) {
-        player.openMenu(new SimpleMenuProvider(
-            (id, inv, p) -> new DummyEntityMenu(id, inv, DummyEntity.this),
-            DummyEntity.this.getDisplayName()
-        ));
+//        player.openMenu(new SimpleMenuProvider(
+//            (id, inv, p) -> new DummyEntityMenu(id, inv, DummyEntity.this),
+//            DummyEntity.this.getDisplayName()
+//        ));
+    	player.openMenu(this);
     }
 
 
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inv, Player pPlayer) {
-        return new DummyEntityMenu(id, inv, DummyEntity.this);
+    public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
+        return new DummyEntityMenu(id, playerInventory, this);
     }
+
 
 
     

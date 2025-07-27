@@ -92,7 +92,7 @@ minecraft {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
         }
-
+	
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
@@ -287,4 +287,9 @@ publishMods {
         projectId = "MsUYOV2p"
         minecraftVersions.add(minecraft_version)
     }*/
+}
+sourceSets.each {
+    def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+    it.output.resourcesDir = dir
+    it.java.destinationDirectory = dir
 }

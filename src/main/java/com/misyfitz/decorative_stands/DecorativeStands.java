@@ -1,6 +1,6 @@
 package com.misyfitz.decorative_stands;
 
-import com.misyfitz.decorative_stands.compat.Mods;
+import com.misyfitz.decorative_stands.compat.Mods; 
 
 import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.client.model.DummyModel;

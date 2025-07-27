@@ -32,52 +32,6 @@ public class DummyEntityMenuScreen extends AbstractContainerScreen<DummyEntityMe
         super(menu, playerInventory, title);
     }
 
-//    @Override
-//    protected void init() {
-//        super.init();
-//
-//        DummyEntity dummy = menu.getDummy();
-//        if (dummy != null) {
-//            this.originalRotation = dummy.getYRot();
-//            this.renderRotation = 0f - originalRotation; // Face the viewer
-//        }
-//
-//        int centerX = (this.width - this.imageWidth) / 2;
-//        int centerY = (this.height - this.imageHeight) / 2;
-//
-//        ForgeSlider rotationSlider = new ForgeSlider(
-//        	    centerX + 30, centerY - 10,
-//        	    120, 20, // 20 for better click target
-//        	    Component.literal("Rotation: "),
-//        	    Component.literal("°"),
-//        	    0.0D, 360.0D,
-//        	    renderRotation,
-//        	    false
-//        	) {
-//        	    @Override
-//        	    protected void applyValue() {
-//        	        renderRotation = (float) this.getValue();
-//        	        this.setMessage(Component.literal("Rotation: " + (int) renderRotation + "°"));
-//        	    }
-//        	};
-//
-//        this.addRenderableWidget(rotationSlider);
-//        // Optional: set initial message explicitly
-//        rotationSlider.setMessage(Component.literal("Rotation: " + (int) renderRotation + "°"));
-//
-//        this.addRenderableWidget(rotationSlider);
-//
-//        // Reset button
-//        this.addRenderableWidget(Button.builder(
-//        	    Component.literal("🔄"), // "🔄"/"↺"
-//        	    btn -> {
-//        	        renderRotation = 180f - originalRotation;
-//        	        rotationSlider.setValue(renderRotation); // Sync slider
-//        	        rotationSlider.setMessage(Component.literal("Rotation: " + (int) renderRotation + "°"));
-//        	    }
-//        	).bounds(centerX + 115, centerY + 60, 20, 20).build());
-//    }
-
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
     	
