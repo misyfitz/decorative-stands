@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.content.block.entity.SpyglassStandBlockEntity;
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
+import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,6 +49,12 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
 		super(pProperties);
 	    this.registerDefaultState(this.stateDefinition.any()
 	    		.setValue(FACING, Direction.NORTH));
+	}
+	
+	@Override
+	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
@@ -118,6 +125,6 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
 		return new SpyglassStandBlockEntity(pPos, pState);
 	}
-	
+
 
 }

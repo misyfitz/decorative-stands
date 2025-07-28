@@ -6,6 +6,7 @@ import com.misyfitz.decorative_stands.client.ClientZoomHandler;
 import com.misyfitz.decorative_stands.client.ScopeOverlay;
 import com.misyfitz.decorative_stands.content.block.entity.BinocularStandBlockEntity;
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
+import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,6 +46,12 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
         
     }
 
+	@Override
+	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
@@ -105,5 +112,7 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 	    return new BinocularStandBlockEntity(pos, state);
 	}
+
+
 
 }

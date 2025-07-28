@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.misyfitz.decorative_stands.content.block.entity.DummyStandBlockEntity;
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
+import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,6 +49,12 @@ public class DummyStandBlock extends HorizontalDirectionalBlock implements Entit
 		    Direction.WEST, BASE_SHAPE
 		);
 
+	
+	@Override
+	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -129,4 +136,5 @@ public class DummyStandBlock extends HorizontalDirectionalBlock implements Entit
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 	    return new DummyStandBlockEntity(pos, state);
 	}
+
 }

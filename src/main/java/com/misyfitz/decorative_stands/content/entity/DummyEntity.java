@@ -46,7 +46,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.api.distmarker.Dist;
 
 
@@ -348,18 +347,18 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     }
 
     public void openMenu(ServerPlayer player) {
-        NetworkHooks.openScreen(player, new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return DummyEntity.this.getDisplayName();
-            }
-
-            @Override
-            public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
-                // Use new universal menu here
-                return new DummyEntityMenu(id, inv, DummyEntity.this);
-            }
-        }, buf -> buf.writeVarInt(this.getId()));
+//        NetworkHooks.openScreen(player, new MenuProvider() {
+//            @Override
+//            public Component getDisplayName() {
+//                return DummyEntity.this.getDisplayName();
+//            }
+//
+//            @Override
+//            public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
+//                // Use new universal menu here
+//                return new DummyEntityMenu(id, inv, DummyEntity.this);
+//            }
+//        }, buf -> buf.writeVarInt(this.getId()));
     }
 
     @Override
