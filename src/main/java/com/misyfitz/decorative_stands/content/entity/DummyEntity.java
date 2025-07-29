@@ -23,13 +23,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
@@ -44,9 +42,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.api.distmarker.Dist;
 
 
 public class DummyEntity extends LivingEntity implements MenuProvider {
@@ -286,13 +282,15 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
 
 
     
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.put("Inventory", inventory.serializeNBT());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         if (tag.contains("Inventory")) {
@@ -307,13 +305,7 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     public HumanoidArm getMainArm() {
         return HumanoidArm.RIGHT;
     }
-
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 1.62F;
-    }
-
+    
     
     @Override
     public void tick() {
@@ -347,19 +339,19 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     }
 
     public void openMenu(ServerPlayer player) {
-//        NetworkHooks.openScreen(player, new MenuProvider() {
-//            @Override
-//            public Component getDisplayName() {
-//                return DummyEntity.this.getDisplayName();
-//            }
-//
-//            @Override
-//            public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
-//                // Use new universal menu here
-//                return new DummyEntityMenu(id, inv, DummyEntity.this);
-//            }
-//        }, buf -> buf.writeVarInt(this.getId()));
+        player.openMenu(new MenuProvider() {
+            @Override
+            public Component getDisplayName() {
+                return DummyEntity.this.getDisplayName();
+            }
+
+            @Override
+            public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
+                return new DummyEntityMenu(id, inv, DummyEntity.this);
+            }
+        }, buffer -> buffer.writeVarInt(this.getId()));
     }
+
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inv, Player pPlayer) {
@@ -386,7 +378,6 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
 
     // === Prevent Drops / Damage / Interference ===
 
-    @SuppressWarnings("deprecation")
 	@Override
     public boolean hurt(DamageSource source, float amount) {
         if (level().isClientSide || !isAlive()) return true;
@@ -408,7 +399,7 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
             // Axe or modded axe tool handling
             if (held.canPerformAction(net.minecraftforge.common.ToolActions.AXE_DIG)) {
                 toolEfficiency = 2.0f;
-                int effLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, held);
+                int effLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.EFFICIENCY, held);
                 if (effLevel > 0) {
                     toolEfficiency += effLevel * 0.5f;
                 }

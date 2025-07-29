@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -38,6 +37,8 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
 
     public static final VoxelShape SHAPE = Block.box(6, 0, 6, 10, 24, 10);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    
+	public static final MapCodec<BinocularStandBlock> CODEC = simpleCodec(BinocularStandBlock::new);
 
     public BinocularStandBlock(Properties properties) {
         super(properties);
@@ -48,8 +49,7 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
 
 	@Override
 	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-		// TODO Auto-generated method stub
-		return null;
+		return CODEC;
 	}
     
     @Override
@@ -79,7 +79,7 @@ public class BinocularStandBlock extends HorizontalDirectionalBlock implements E
     }
     
 	@Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof BinocularStandBlockEntity stand) {
             // Set the player as user

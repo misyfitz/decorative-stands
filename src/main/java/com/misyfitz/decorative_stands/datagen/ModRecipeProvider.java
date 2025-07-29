@@ -1,7 +1,5 @@
 package com.misyfitz.decorative_stands.datagen;
 
-import java.util.function.Consumer;
-
 import com.misyfitz.decorative_stands.DecorativeStands;
 import com.misyfitz.decorative_stands.util.DSBlocks;
 import com.misyfitz.decorative_stands.util.DSItems;
@@ -20,10 +18,9 @@ import net.minecraft.world.item.Item;
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
 
 	public ModRecipeProvider(PackOutput pOutput) {
-		super(pOutput);
+		super(pOutput, null);
 	}
 
-	@SuppressWarnings({ "deprecation" })
 	@Override
 	protected void buildRecipes(RecipeOutput output) {
 		//shaped

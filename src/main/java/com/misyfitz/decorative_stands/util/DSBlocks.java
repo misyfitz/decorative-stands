@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -75,20 +75,32 @@ public class DSBlocks {
             //() -> new SpyglassStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final RegistryObject<Block> BINOCULAR_STAND = registerBlock("binocular_stand",
-            () -> new BinocularStandBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
+            () -> new BinocularStandBlock(BlockBehaviour.Properties.of()
+            	    .strength(1.5F, 6.0F)
+            	    .sound(SoundType.STONE)
+            	    .noOcclusion()));
     
     public static final RegistryObject<Block> WEAPON_STAND = registerBlock("weapon_stand",
-            () -> new WeaponStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+            () -> new WeaponStandBlock(BlockBehaviour.Properties.of()
+            	    .strength(2.0F, 3.0F)
+            	    .sound(SoundType.WOOD)
+            	    .noOcclusion()));
 
     public static final RegistryObject<Block> DUMMY_STAND = registerBlock("dummy_stand",
-            () -> new DummyStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+            () -> new DummyStandBlock(BlockBehaviour.Properties.of()
+            	    .strength(2.0F, 3.0F)
+            	    .sound(SoundType.WOOD)
+            	    .noOcclusion()));
     
     // Dynamic variants of Spyglass Stand (e.g., for each log type)
     public static final Map<String, RegistryObject<Block>> SPYGLASS_STANDS = new HashMap<>();
 
     public static void registerSpyglassStandVariant(String name) {
         RegistryObject<Block> block = registerBlock("spyglass_stand_" + name,
-                () -> new SpyglassStandBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+                () -> new SpyglassStandBlock(BlockBehaviour.Properties.of()
+                	    .strength(2.0F, 3.0F)
+                	    .sound(SoundType.WOOD)
+                	    .noOcclusion()));
         SPYGLASS_STANDS.put(name, block);
     }
 

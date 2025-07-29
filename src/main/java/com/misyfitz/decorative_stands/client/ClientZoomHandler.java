@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,13 +32,6 @@ public class ClientZoomHandler {
 	private static float scopeAspectRatio = 1.0F;
 
     private static CameraType previousCameraType = null;
-    
-    public static final IGuiOverlay ZOOM_OVERLAY = (gui, guiGraphics, partialTick, width, height) -> {
-
-    	if (isZooming && currentScope != null) {
-            renderCustomScopeOverlay(guiGraphics, partialTick);
-        }
-    };
 
 
     public static void startZoomFromItem(ResourceLocation texture, float ratio) {
@@ -144,13 +136,15 @@ public class ClientZoomHandler {
                 }
             }
             case 1 -> {
-                boolean changedItem = !ItemStack.isSameItemSameTags(zoomItem, mc.player.getMainHandItem());
+                ItemStack current = mc.player.getMainHandItem();
+                boolean changedItem = zoomItem.getItem() != current.getItem() || !ItemStack.matches(zoomItem, current);
                 if (mc.options.keyShift.isDown() || changedItem) {
                     mc.player.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
                     stopZoom();
                     return;
                 }
             }
+
         }
     }
 
@@ -162,16 +156,17 @@ public class ClientZoomHandler {
         }
     }
 
-    private static void renderCustomScopeOverlay(GuiGraphics guiGraphics, float partialTick) {
+    @SuppressWarnings("unused")
+	private static void renderCustomScopeOverlay(GuiGraphics guiGraphics, float partialTick) {
         Minecraft mc = Minecraft.getInstance();
         int width = mc.getWindow().getGuiScaledWidth();
         int height = mc.getWindow().getGuiScaledHeight();
 
         if (currentScope != null) {
             if (currentScope.equals(ScopeOverlay.SPYGLASS_SCOPE)) {
-                ScopeOverlay.CUSTOM_SCOPE_SPYGLASS.render(null, guiGraphics, partialTick, width, height);
+                ScopeOverlay.CUSTOM_SCOPE_SPYGLASS.render(guiGraphics, partialTick, width, height);
             } else {
-                ScopeOverlay.CUSTOM_SCOPE_BINOCULAR.render(null, guiGraphics, partialTick, width, height);
+                ScopeOverlay.CUSTOM_SCOPE_BINOCULAR.render(guiGraphics, partialTick, width, height);
             }
         }
     }

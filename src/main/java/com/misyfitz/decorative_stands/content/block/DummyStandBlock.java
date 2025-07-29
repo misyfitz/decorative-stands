@@ -40,6 +40,7 @@ public class DummyStandBlock extends HorizontalDirectionalBlock implements Entit
 
 	private static final VoxelShape BASE_SHAPE = Block.box(2, 0, 2, 14, 1, 14);
 	
+	public static final MapCodec<DummyStandBlock> CODEC = simpleCodec(DummyStandBlock::new);
 
 	@SuppressWarnings("unused")
 	private static final Map<Direction, VoxelShape> SHAPE_MAP = Map.of(
@@ -52,8 +53,7 @@ public class DummyStandBlock extends HorizontalDirectionalBlock implements Entit
 	
 	@Override
 	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-		// TODO Auto-generated method stub
-		return null;
+		return CODEC;
 	}
 	
 	@Override
@@ -108,7 +108,6 @@ public class DummyStandBlock extends HorizontalDirectionalBlock implements Entit
     	pBuilder.add(FACING);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pState.getBlock() != pNewState.getBlock()) {

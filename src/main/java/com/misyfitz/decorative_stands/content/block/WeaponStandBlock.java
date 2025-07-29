@@ -9,7 +9,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -40,6 +40,8 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
 	// Combined shape
 	public static final VoxelShape SHAPE = Shapes.or(BASE, TUBE);
 	
+	public static final MapCodec<WeaponStandBlock> CODEC = simpleCodec(WeaponStandBlock::new);
+	
 	public WeaponStandBlock(Properties pProperties) {
 		super(pProperties);
 		this.registerDefaultState(this.stateDefinition.any()
@@ -48,8 +50,7 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
 
 	@Override
 	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-		// TODO Auto-generated method stub
-		return null;
+		return CODEC;
 	}
 	
 	@Override
@@ -78,7 +79,7 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
 
     
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult pHitResult) {
         if (!level.isClientSide()) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof WeaponStandBlockEntity stand) {
@@ -90,7 +91,7 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
                     toInsert.setCount(1);
                     stand.setItem(toInsert);
                     held.shrink(1);
-                    return InteractionResult.CONSUME;
+                    return ItemInteractionResult.CONSUME;
                 } else if (!stand.isEmpty()) {
                     // Remove item
                     ItemStack removed = stand.getItem().copy();
@@ -98,15 +99,14 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
                     if (!player.addItem(removed)) {
                         player.drop(removed, false);
                     }
-                    return InteractionResult.CONSUME;
+                    return ItemInteractionResult.CONSUME;
                 }
             }
         }
 
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
     
-    @SuppressWarnings("deprecation")
 	@Override
     public void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!oldState.is(newState.getBlock())) {

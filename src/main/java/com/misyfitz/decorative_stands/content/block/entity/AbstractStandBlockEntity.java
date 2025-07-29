@@ -1,6 +1,7 @@
 package com.misyfitz.decorative_stands.content.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
@@ -76,38 +77,40 @@ public abstract class AbstractStandBlockEntity extends BlockEntity implements Me
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        tag.putInt("Time", time);
-        tag.putFloat("Rot", rot);
-        tag.putFloat("TRot", tRot);
-        if (user != null)
-            tag.putUUID("User", user);
+    protected void saveAdditional(CompoundTag tag, Provider provider) {
+        super.saveAdditional(tag, provider);
+        tag.putInt("Time", this.time);
+        tag.putFloat("Rot", this.rot);
+        tag.putFloat("TRot", this.tRot);
+        if (this.user != null) {
+            tag.putUUID("User", this.user);
+        }
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        time = tag.getInt("Time");
-        rot = tag.getFloat("Rot");
-        tRot = tag.getFloat("TRot");
-        if (tag.hasUUID("User"))
-            user = tag.getUUID("User");
+    public void loadAdditional(CompoundTag tag, Provider provider) {
+        super.loadAdditional(tag, provider);
+        this.time = tag.getInt("Time");
+        this.rot = tag.getFloat("Rot");
+        this.tRot = tag.getFloat("TRot");
+        this.user = tag.hasUUID("User") ? tag.getUUID("User") : null;
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag tag = super.getUpdateTag();
-        if (user != null)
-            tag.putUUID("User", user);
+    public CompoundTag getUpdateTag(Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
+        if (this.user != null) {
+            tag.putUUID("User", this.user);
+        }
         return tag;
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        super.handleUpdateTag(tag);
-        user = tag.hasUUID("User") ? tag.getUUID("User") : null;
+    public void handleUpdateTag(CompoundTag tag, Provider provider) {
+        super.handleUpdateTag(tag, provider);
+        this.user = tag.hasUUID("User") ? tag.getUUID("User") : null;
     }
+
     
     @Nullable
     @Override

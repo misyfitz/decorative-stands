@@ -8,6 +8,7 @@ import com.misyfitz.decorative_stands.util.DSUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -176,26 +177,27 @@ public class DummyStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, Provider provider) {
+        super.saveAdditional(tag, provider);
         if (dummyEntityUUID != null) tag.putUUID("DummyUUID", dummyEntityUUID);
 	    if (playerSkinName != null) { tag.putString("PlayerSkinName", playerSkinName); }
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, Provider provider) {
+        super.loadAdditional(tag, provider);
         if (tag.hasUUID("DummyUUID")) dummyEntityUUID = tag.getUUID("DummyUUID");
 	    if (tag.contains("PlayerSkinName")) { playerSkinName = tag.getString("PlayerSkinName"); }
     }
 
     
-//    @Override
-//    public CompoundTag getUpdateTag() {
-//        CompoundTag tag = super.getUpdateTag();
-//        tag.put("dummy", inventory.serializeNBT());
-//        return tag;
-//    }
+    @SuppressWarnings("deprecation")
+	@Override
+    public CompoundTag getUpdateTag(Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
+        tag.put("dummy", inventory.serializeNBT());
+        return tag;
+    }
 
     @Nullable
     @Override

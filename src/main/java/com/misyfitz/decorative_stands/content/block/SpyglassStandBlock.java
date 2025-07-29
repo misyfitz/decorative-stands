@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -43,7 +42,7 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
 	// Combined shape
 	public static final VoxelShape SHAPE = Shapes.or(BASE, TUBE);
 
-
+	public static final MapCodec<SpyglassStandBlock> CODEC = simpleCodec(SpyglassStandBlock::new);
 
 	public SpyglassStandBlock(Properties pProperties) {
 		super(pProperties);
@@ -53,8 +52,7 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
 	
 	@Override
 	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-		// TODO Auto-generated method stub
-		return null;
+		return CODEC;
 	}
 	
 	@Override
@@ -87,8 +85,7 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
     }
 	
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
-                                 InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof SpyglassStandBlockEntity stand) {
             // Set the player as user
             stand.setUser(player.getUUID());

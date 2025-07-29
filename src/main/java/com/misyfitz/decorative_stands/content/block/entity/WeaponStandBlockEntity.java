@@ -1,10 +1,9 @@
 package com.misyfitz.decorative_stands.content.block.entity;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
 import com.misyfitz.decorative_stands.util.DSBlockEntities;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
@@ -17,9 +16,8 @@ import net.minecraftforge.items.ItemStackHandler;
 public class WeaponStandBlockEntity extends BlockEntity {
 
     private final ItemStackHandler inventory = new ItemStackHandler(1) {
-        @SuppressWarnings("deprecation")
 		@Override
-        protected int getStackLimit(int slot, @NotNull ItemStack stack) {
+        protected int getStackLimit(int slot, ItemStack stack) {
             return 1;
         }
 
@@ -65,22 +63,24 @@ public class WeaponStandBlockEntity extends BlockEntity {
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    @SuppressWarnings("deprecation")
+	@Override
+    protected void saveAdditional(CompoundTag tag, Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.put("inventory", inventory.serializeNBT());
     }
 
-    @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    @SuppressWarnings("deprecation")
+	@Override
+    public void loadAdditional(CompoundTag tag, Provider provider) {
+        super.loadAdditional(tag, provider);
         inventory.deserializeNBT(tag.getCompound("inventory"));
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(Provider provider) {
         CompoundTag tag = new CompoundTag();
-        saveAdditional(tag);
+        saveAdditional(tag, provider);
         return tag;
     }
 
