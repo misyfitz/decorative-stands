@@ -347,11 +347,17 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     }
 
     public void openMenu(ServerPlayer player) {
-//        player.openMenu(new SimpleMenuProvider(
-//            (id, inv, p) -> new DummyEntityMenu(id, inv, DummyEntity.this),
-//            DummyEntity.this.getDisplayName()
-//        ));
-    	player.openMenu(this);
+        player.openMenu(new MenuProvider() {
+            @Override
+            public Component getDisplayName() {
+                return DummyEntity.this.getDisplayName();
+            }
+
+            @Override
+            public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
+                return new DummyEntityMenu(id, inv, DummyEntity.this);
+            }
+        }, buffer -> buffer.writeVarInt(this.getId()));
     }
 
 
@@ -359,9 +365,6 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
         return new DummyEntityMenu(id, playerInventory, this);
     }
-
-
-
     
     @Override
     public Component getDisplayName() {
@@ -517,8 +520,5 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     public boolean shouldBeSaved() {
         return true;
     }
-
-
-
     
 }
