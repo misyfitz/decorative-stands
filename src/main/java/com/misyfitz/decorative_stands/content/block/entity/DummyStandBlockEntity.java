@@ -191,13 +191,13 @@ public class DummyStandBlockEntity extends BlockEntity {
     }
 
     
-    @SuppressWarnings("deprecation")
-	@Override
-    public CompoundTag getUpdateTag(Provider provider) {
-        CompoundTag tag = super.getUpdateTag(provider);
-        tag.put("dummy", inventory.serializeNBT());
-        return tag;
-    }
+//    @SuppressWarnings("deprecation")
+//	@Override
+//    public CompoundTag getUpdateTag(Provider provider) {
+//        CompoundTag tag = super.getUpdateTag(provider);
+//        tag.put("dummy", inventory.serializeNBT());
+//        return tag;
+//    }
 
     @Nullable
     @Override
