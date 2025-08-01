@@ -6,7 +6,7 @@
       "item": "minecraft:spyglass"
     },
     "W": {
-      "item": "biomesoplenty:stripped_pine_log"
+      "item": "biomesoplenty:stripped_fir_log"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "WWW"
   ],
   "result": {
-    "item": "decorative_stands:spyglass_stand_pine"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:spyglass_stand_fir"
+  }
 }

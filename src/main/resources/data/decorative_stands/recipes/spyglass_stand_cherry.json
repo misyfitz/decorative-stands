@@ -6,7 +6,7 @@
       "item": "minecraft:spyglass"
     },
     "W": {
-      "item": "minecraft:stripped_spruce_log"
+      "item": "minecraft:stripped_cherry_log"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "WWW"
   ],
   "result": {
-    "item": "decorative_stands:spyglass_stand_spruce"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:spyglass_stand_cherry"
+  }
 }

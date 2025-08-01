@@ -6,7 +6,7 @@
       "item": "minecraft:spyglass"
     },
     "W": {
-      "item": "biomesoplenty:stripped_dead_log"
+      "item": "biomesoplenty:stripped_empyreal_log"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "WWW"
   ],
   "result": {
-    "item": "decorative_stands:spyglass_stand_dead"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:spyglass_stand_empyreal"
+  }
 }

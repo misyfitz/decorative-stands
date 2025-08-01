@@ -6,7 +6,7 @@
       "item": "minecraft:spyglass"
     },
     "W": {
-      "item": "minecraft:stripped_mangrove_log"
+      "item": "biomesoplenty:stripped_maple_log"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "WWW"
   ],
   "result": {
-    "item": "decorative_stands:spyglass_stand_mangrove"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:spyglass_stand_maple"
+  }
 }

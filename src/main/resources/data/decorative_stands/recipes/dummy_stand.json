@@ -12,7 +12,7 @@
     "I I"
   ],
   "result": {
-    "item": "decorative_stands:dummy_stand"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:dummy_stand"
+  }
 }

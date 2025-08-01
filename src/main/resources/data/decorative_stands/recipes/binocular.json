@@ -15,7 +15,7 @@
     "I I"
   ],
   "result": {
-    "item": "decorative_stands:binocular"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:binocular"
+  }
 }

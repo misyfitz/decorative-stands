@@ -15,7 +15,7 @@
     "SSS"
   ],
   "result": {
-    "item": "decorative_stands:binocular_stand"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "decorative_stands:binocular_stand"
+  }
 }

@@ -1,6 +1,7 @@
 package com.misyfitz.decorative_stands.content.entity;
 
 import java.util.EnumMap;
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,6 +45,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.nbt.ListTag;
 
 
 public class DummyEntity extends LivingEntity implements MenuProvider {
@@ -76,24 +79,29 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     public GameProfile getSkinProfile() {
         return skinProfile;
     }
-
-    
+ 
     Direction facing;
     BlockState blockState;
     
     public static final Map<EquipmentSlot, AABB> SLOT_BOUNDING_BOXES = new EnumMap<>(EquipmentSlot.class);
-
-
     
     private float damageAccumulated = 0f;
     private int lastHitTick = 0;
 
+    
     private final ItemStackHandler inventory = new ItemStackHandler(6) {
         @Override
+        public void setStackInSlot(int slot, ItemStack stack) {
+            super.setStackInSlot(slot, stack == null ? ItemStack.EMPTY : stack);
+        }
+
+        @Override
         protected void onContentsChanged(int slot) {
-            setItemFromSlot(slot, getStackInSlot(slot));
+            ItemStack stack = getStackInSlot(slot);
+            setItemFromSlot(slot, stack == null ? ItemStack.EMPTY : stack);
         }
     };
+
 
     private void setItemFromSlot(int slot, ItemStack stack) {
         switch (slot) {
@@ -119,7 +127,7 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     public DummyEntity(EntityType<? extends LivingEntity> type, Level level) {
         
     	super(type, level);     // and make sure it's not visible
-
+        this.noPhysics = true;
     }
 
     // === Attributes ===
@@ -161,16 +169,23 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
         };
         if (index >= 0) inventory.setStackInSlot(index, stack);
     }
-
-
     
     public void syncFromInventory(ItemStackHandler handler) {
-        for (int i = 0; i < 4; i++) {
-            armorItems.set(i, handler.getStackInSlot(i));
+        for (int i = 0; i < handler.getSlots(); i++) {
+            ItemStack stack = handler.getStackInSlot(i);
+            if (stack == null) stack = ItemStack.EMPTY;
+
+            switch (i) {
+                case 0 -> armorItems.set(0, stack); // Boots
+                case 1 -> armorItems.set(1, stack); // Leggings
+                case 2 -> armorItems.set(2, stack); // Chestplate
+                case 3 -> armorItems.set(3, stack); // Helmet
+                case 4 -> handItems.set(0, stack);  // Main hand
+                case 5 -> handItems.set(1, stack);  // Off hand
+            }
         }
-        handItems.set(0, handler.getStackInSlot(4)); // MAINHAND
-        handItems.set(1, handler.getStackInSlot(5)); // OFFHAND
     }
+
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 localHit, InteractionHand hand) {
@@ -278,26 +293,55 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
 
         return prefersLeftSide ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
     }
-
-
-
     
-    @SuppressWarnings("deprecation")
-	@Override
+    
+    @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.put("Inventory", inventory.serializeNBT());
+
+        ListTag armorList = new ListTag();
+        for (ItemStack item : armorItems) {
+            armorList.add(item.saveOptional(this.registryAccess()));
+        }
+        tag.put("ArmorItems", armorList);
+
+        ListTag handList = new ListTag();
+        for (ItemStack item : handItems) {
+            handList.add(item.saveOptional(this.registryAccess()));
+        }
+        tag.put("HandItems", handList);
     }
 
-    @SuppressWarnings("deprecation")
-	@Override
+
+    @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        if (tag.contains("Inventory")) {
-            inventory.deserializeNBT(tag.getCompound("Inventory"));
-            syncFromInventory(inventory); // Optional, to refresh visuals
+
+        if (tag.contains("ArmorItems", Tag.TAG_LIST)) {
+            ListTag armorList = tag.getList("ArmorItems", Tag.TAG_COMPOUND);
+            for (int i = 0; i < armorItems.size(); i++) {
+                CompoundTag itemTag = armorList.getCompound(i);
+                armorItems.set(i, ItemStack.parseOptional(this.registryAccess(), itemTag));
+            }
         }
+
+        if (tag.contains("HandItems", Tag.TAG_LIST)) {
+            ListTag handList = tag.getList("HandItems", Tag.TAG_COMPOUND);
+            for (int i = 0; i < handItems.size(); i++) {
+                CompoundTag itemTag = handList.getCompound(i);
+                handItems.set(i, ItemStack.parseOptional(this.registryAccess(), itemTag));
+            }
+        }
+
+        // sync to inventory slots
+        for (int i = 0; i < 4; i++) {
+            inventory.setStackInSlot(i, armorItems.get(i));
+        }
+        inventory.setStackInSlot(4, handItems.get(0));
+        inventory.setStackInSlot(5, handItems.get(1));
     }
+
+
     
     // === Optional Visual/Main Hand Side ===
     
@@ -513,8 +557,5 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     public boolean shouldBeSaved() {
         return true;
     }
-
-
-
     
 }

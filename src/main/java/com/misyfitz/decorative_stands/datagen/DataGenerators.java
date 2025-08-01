@@ -22,9 +22,9 @@ public class DataGenerators {
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 		
 		generator.addProvider(event.includeServer(), 
-				new ModRecipeProvider(packOutput));
+				new ModRecipeProvider(packOutput, lookupProvider));
 		generator.addProvider(event.includeServer(),
-				ModLootTableProvider.create(packOutput));
+				ModLootTableProvider.create(packOutput, lookupProvider));
 		
 		//client only
 		generator.addProvider(event.includeClient(),
