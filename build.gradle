@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.38'
 	id "me.modmuss50.mod-publish-plugin" version "0.8.4"
@@ -24,8 +24,8 @@ configurations {
     datagenImplementation.extendsFrom compileClasspath
 }
 
-// Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -86,18 +86,13 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
         }
 
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
         }
-
+	
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
@@ -168,22 +163,18 @@ dependencies {
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime   
+    compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"))
+    compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}"))
     
-    compileOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}"))
-    
-    runtimeOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
+    runtimeOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
     
     // BOP dependencies
-    compileOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
-    runtimeOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
-	runtimeOnly(fg.deobf("curse.maven:glitchcore-${glitchcore_project}:${glitchcore_file}"))      // GlitchCore
-	runtimeOnly(fg.deobf("curse.maven:terrablender-${terrablender_project}:${terrableder_file}"))    // TerraBlender
-	datagenImplementation(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))
+    compileOnly (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
+    runtimeOnly (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
+	runtimeOnly (fg.deobf("curse.maven:glitchcore-${glitchcore_project}:${glitchcore_file}"))      // GlitchCore
+	runtimeOnly (fg.deobf("curse.maven:terrablender-${terrablender_project}:${terrableder_file}"))    // TerraBlender
+	datagenImplementation (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))
 	
 	//curios api
 /*	compileOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))
@@ -282,7 +273,7 @@ publishMods {
 /*    github {
         accessToken = secrets["GITHUB_TOKEN"]
         repository = "misyfitz/decorative-stands"
-        commitish = "1.20.1"
+        commitish = "1.20.6"
     }*/
 
 /*    curseforge {
@@ -297,7 +288,6 @@ publishMods {
         minecraftVersions.add(minecraft_version)
     }*/
 }
-
 sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
     it.output.resourcesDir = dir
