@@ -12,9 +12,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class DSCreativeTabs {
 
-    private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DecorativeStands.MODID);
+    private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = 
+    		DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DecorativeStands.MODID);
 
-    public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
+    public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", 
+    		() -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.decorative_stands.main"))
             .icon(() -> new ItemStack(DSBlocks.SPYGLASS_STANDS.get("dark_oak").get()))
             .displayItems((params, output) -> {

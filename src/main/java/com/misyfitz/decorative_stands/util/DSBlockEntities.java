@@ -27,22 +27,26 @@ public class DSBlockEntities {
 				DSBlocks.SPYGLASS_STANDS.values().forEach(ro -> validBlocks.add(ro.get()));
 
 				// Pass all blocks to the builder
-				return BlockEntityType.Builder.of(SpyglassStandBlockEntity::new,
-						validBlocks.toArray(new Block[0])
-				).build(null);
+				return BlockEntityType.Builder.<SpyglassStandBlockEntity>
+					of(SpyglassStandBlockEntity::new, validBlocks.toArray(new Block[0]))
+			            .build(null);
 			});
 
 	public static final RegistryObject<BlockEntityType<BinocularStandBlockEntity>> BINOCULAR_STAND_BE =
-			BLOCK_ENTITIES.register("binocular_stand_be", () -> BlockEntityType.Builder.of(
-					BinocularStandBlockEntity::new, DSBlocks.BINOCULAR_STAND.get()).build(null));
+		    BLOCK_ENTITIES.register("binocular_stand_be", () -> BlockEntityType.Builder
+		        .<BinocularStandBlockEntity>of(BinocularStandBlockEntity::new, DSBlocks.BINOCULAR_STAND.get())
+		        .build(null));
+
 	
 	public static final RegistryObject<BlockEntityType<WeaponStandBlockEntity>> WEAPON_STAND_BE =
-			BLOCK_ENTITIES.register("weapon_stand_be", () -> BlockEntityType.Builder.of(
-					WeaponStandBlockEntity::new, DSBlocks.WEAPON_STAND.get()).build(null));
+			BLOCK_ENTITIES.register("weapon_stand_be", () -> BlockEntityType.Builder
+					.<WeaponStandBlockEntity>of(WeaponStandBlockEntity::new, DSBlocks.WEAPON_STAND.get())
+			        .build(null));
 	
 	public static final RegistryObject<BlockEntityType<DummyStandBlockEntity>> DUMMY_STAND_BE =
-			BLOCK_ENTITIES.register("dummy_stand_be", () -> BlockEntityType.Builder.of(
-					DummyStandBlockEntity::new, DSBlocks.DUMMY_STAND.get()).build(null));
+			BLOCK_ENTITIES.register("dummy_stand_be", () -> BlockEntityType.Builder
+					.<DummyStandBlockEntity>of(DummyStandBlockEntity::new, DSBlocks.DUMMY_STAND.get())
+			        .build(null));
 	
 	public static void register(IEventBus eventBus) {
 		BLOCK_ENTITIES.register(eventBus);

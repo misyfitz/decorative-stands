@@ -49,7 +49,6 @@ public class DecorativeStands {
 	private static final Logger LOGGER = LogUtils.getLogger();
 
     public static IEventBus modEventBus;
-    //private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
     @SuppressWarnings("removal")
 	public DecorativeStands() {
