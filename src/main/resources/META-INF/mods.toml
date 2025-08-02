@@ -59,7 +59,7 @@ description='''${mod_description}'''
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.decorative_stands]]
+[[dependencies.${mod_id}]]
     modId="biomesoplenty"
     mandatory=false
     versionRange="${bop_version_range}"
