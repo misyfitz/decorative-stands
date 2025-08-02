@@ -179,11 +179,11 @@ dependencies {
     runtimeOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
     
     // BOP dependencies
-/*    compileOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
+    compileOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
     runtimeOnly(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
 	runtimeOnly(fg.deobf("curse.maven:glitchcore-${glitchcore_project}:${glitchcore_file}"))      // GlitchCore
 	runtimeOnly(fg.deobf("curse.maven:terrablender-${terrablender_project}:${terrableder_file}"))    // TerraBlender
-	datagenImplementation(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))*/
+	datagenImplementation(fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))
 	
 	//curios api
 /*	compileOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))
