@@ -24,8 +24,8 @@ configurations {
     datagenImplementation.extendsFrom compileClasspath
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+// Mojang ships Java 21 to end users in 1.18+, so your mod should target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -276,17 +276,17 @@ publishMods {
         commitish = "1.20.6"
     }*/
 
-/*    curseforge {
+    curseforge {
         accessToken = secrets["CURSEFORGE_TOKEN"]
         projectId = "1304159"
         minecraftVersions.add(minecraft_version)
-    }*/
+    }
     
-/*        modrinth {
+        modrinth {
         accessToken = secrets["MODRINTH_TOKEN"]
         projectId = "MsUYOV2p"
         minecraftVersions.add(minecraft_version)
-    }*/
+    }
 }
 sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
