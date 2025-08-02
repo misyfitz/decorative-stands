@@ -9,10 +9,11 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -49,7 +50,7 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
 	}
 
 	@Override
-	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+	protected  MapCodec<? extends HorizontalDirectionalBlock> codec() {
 		return CODEC;
 	}
 	
@@ -78,34 +79,39 @@ public class WeaponStandBlock extends HorizontalDirectionalBlock implements Enti
     }
 
     
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult pHitResult) {
-        if (!level.isClientSide()) {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof WeaponStandBlockEntity stand) {
-                ItemStack held = player.getItemInHand(hand);
+//    @Override
+//    public InteractionResult useOn(UseOnContext context) {
+//        Level level = context.getLevel();
+//        BlockPos pos = context.getClickedPos();
+//        Player player = context.getPlayer();
+//        InteractionHand hand = context.getHand();
+//        ItemStack held = context.getItemInHand();
+//
+//        if (!level.isClientSide()) {
+//            BlockEntity be = level.getBlockEntity(pos);
+//            if (be instanceof WeaponStandBlockEntity stand) {
+//                if (stand.isEmpty() && !held.isEmpty()) {
+//                    // Insert one item
+//                    ItemStack toInsert = held.copy();
+//                    toInsert.setCount(1);
+//                    stand.setItem(toInsert);
+//                    held.shrink(1);
+//                    return InteractionResult.CONSUME;
+//                } else if (!stand.isEmpty()) {
+//                    // Remove item
+//                    ItemStack removed = stand.getItem().copy();
+//                    stand.clearContents();
+//                    if (!player.addItem(removed)) {
+//                        player.drop(removed, false);
+//                    }
+//                    return InteractionResult.CONSUME;
+//                }
+//            }
+//        }
+//
+//        return InteractionResult.SUCCESS;
+//    }
 
-                if (stand.isEmpty() && !held.isEmpty()) {
-                    // Insert one item
-                    ItemStack toInsert = held.copy();
-                    toInsert.setCount(1);
-                    stand.setItem(toInsert);
-                    held.shrink(1);
-                    return ItemInteractionResult.CONSUME;
-                } else if (!stand.isEmpty()) {
-                    // Remove item
-                    ItemStack removed = stand.getItem().copy();
-                    stand.clearContents();
-                    if (!player.addItem(removed)) {
-                        player.drop(removed, false);
-                    }
-                    return ItemInteractionResult.CONSUME;
-                }
-            }
-        }
-
-        return ItemInteractionResult.SUCCESS;
-    }
     
 	@Override
     public void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {

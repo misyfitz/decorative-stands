@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.38'
 	id "me.modmuss50.mod-publish-plugin" version "0.8.4"
@@ -149,7 +149,7 @@ repositories {
     }
     maven {
         url "https://cursemaven.com"
-    }
+    }   
 }
 
 dependencies {
@@ -159,12 +159,10 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-	
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime   
-    compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"))
+/*    compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"))
     compileOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}"))
     
     runtimeOnly (fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
@@ -174,7 +172,7 @@ dependencies {
     runtimeOnly (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}")) //Biomes O Plenty
 	runtimeOnly (fg.deobf("curse.maven:glitchcore-${glitchcore_project}:${glitchcore_file}"))      // GlitchCore
 	runtimeOnly (fg.deobf("curse.maven:terrablender-${terrablender_project}:${terrableder_file}"))    // TerraBlender
-	datagenImplementation (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))
+	datagenImplementation (fg.deobf("curse.maven:biomes-o-plenty-${bop_project}:${bop_file}"))*/
 	
 	//curios api
 /*	compileOnly(fg.deobf("curse.maven:curios-${curios_project}:${curios_file}"))
@@ -273,10 +271,10 @@ publishMods {
 /*    github {
         accessToken = secrets["GITHUB_TOKEN"]
         repository = "misyfitz/decorative-stands"
-        commitish = "1.20.6"
+        commitish = "1.21"
     }*/
 
-    curseforge {
+/*    curseforge {
         accessToken = secrets["CURSEFORGE_TOKEN"]
         projectId = "1304159"
         minecraftVersions.add(minecraft_version)
@@ -286,7 +284,7 @@ publishMods {
         accessToken = secrets["MODRINTH_TOKEN"]
         projectId = "MsUYOV2p"
         minecraftVersions.add(minecraft_version)
-    }
+    }*/
 }
 sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")

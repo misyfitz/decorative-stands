@@ -119,10 +119,10 @@ public class ClientZoomHandler {
         if (!isZooming || mc.level == null || mc.player == null)
             return;
         
-//        if (mc.options.getCameraType() != CameraType.FIRST_PERSON) {
-//        	previousCameraType = null;
-//        	return;
-//        	}
+        if (mc.options.getCameraType() != CameraType.FIRST_PERSON) {
+        	previousCameraType = null;
+        	return;
+        	}
         switch (isItemUse) {
             case 0 -> {
                 if (mc.options.keyShift.isDown()

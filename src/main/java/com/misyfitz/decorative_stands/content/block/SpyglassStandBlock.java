@@ -84,27 +84,27 @@ public class SpyglassStandBlock extends HorizontalDirectionalBlock implements En
     	pBuilder.add(FACING);
     }
 	
-    @Override
-    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof SpyglassStandBlockEntity stand) {
-            // Set the player as user
-            stand.setUser(player.getUUID());
-            stand.setChanged();
-            level.sendBlockUpdated(pos, state, state, 3);
-
-            // Teleport player behind the block (opposite of facing)
-            Direction facing = state.getValue(FACING);
-            Vec3 behind = Vec3.atCenterOf(pos).relative(facing.getOpposite(), 1);
-
-            player.setDeltaMovement(0, 0, 0);
-            player.teleportTo(behind.x, player.getY(), behind.z);
-            player.setYRot(facing.toYRot());
-            player.setXRot(0);
-            ClientZoomHandler.startCustomZoom(pos); // Start zoom with custom overlay
-            level.playSound(null, pos, SoundEvents.SPYGLASS_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-        }
-        return InteractionResult.SUCCESS;
-    }
+//    @Override
+//    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+//        if (!level.isClientSide && level.getBlockEntity(pos) instanceof SpyglassStandBlockEntity stand) {
+//            // Set the player as user
+//            stand.setUser(player.getUUID());
+//            stand.setChanged();
+//            level.sendBlockUpdated(pos, state, state, 3);
+//
+//            // Teleport player behind the block (opposite of facing)
+//            Direction facing = state.getValue(FACING);
+//            Vec3 behind = Vec3.atCenterOf(pos).relative(facing.getOpposite(), 1);
+//
+//            player.setDeltaMovement(0, 0, 0);
+//            player.teleportTo(behind.x, player.getY(), behind.z);
+//            player.setYRot(facing.toYRot());
+//            player.setXRot(0);
+//            ClientZoomHandler.startCustomZoom(pos); // Start zoom with custom overlay
+//            level.playSound(null, pos, SoundEvents.SPYGLASS_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
+//        }
+//        return InteractionResult.SUCCESS;
+//    }
 
 
 
