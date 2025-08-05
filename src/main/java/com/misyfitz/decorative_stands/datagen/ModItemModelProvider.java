@@ -29,11 +29,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     }
 
-    @SuppressWarnings({ "removal", "unused" })
+    @SuppressWarnings( "unused" )
 	private ItemModelBuilder simpleItems(RegistryObject<Item> binocular) {
     	return withExistingParent(binocular.getId().getPath(),
-    			new ResourceLocation("item/generated")).texture("layer0",
-    			new ResourceLocation(DecorativeStands.MODID, "item/" + binocular.getId().getPath()));
+    			ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+    			ResourceLocation.fromNamespaceAndPath(DecorativeStands.MODID, "item/" + binocular.getId().getPath()));
     }
 
 //	@Override

@@ -28,10 +28,10 @@ public class BinocularItem extends Item {
         super(pProperties);
     }
 
-    @Override
-    public int getUseDuration(ItemStack pStack) {
-        return USE_DURATION;
-    }
+//    @Override
+//    public int getUseDuration(ItemStack pStack) {
+//        return USE_DURATION;
+//    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {

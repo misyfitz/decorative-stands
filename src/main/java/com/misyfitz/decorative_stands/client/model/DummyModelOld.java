@@ -16,9 +16,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class DummyModelOld extends HumanoidModel<LivingEntity> {
 
-    @SuppressWarnings("removal")
 	public static final ModelLayerLocation LAYER_LOCATION =
-        new ModelLayerLocation(new ResourceLocation("decorative_stands", "dummy"), "main");
+        new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("decorative_stands", "dummy"), "main");
 
     public DummyModelOld(ModelPart root) {
         super(root); // pass to HumanoidModel which already manages it
@@ -75,8 +74,8 @@ public class DummyModelOld extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack stack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
-    	super.renderToBuffer(stack, buffer, light, overlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack stack, VertexConsumer buffer, int light, int overlay, int color) {
+    	super.renderToBuffer(stack, buffer, light, overlay, color);
 
     }
 }

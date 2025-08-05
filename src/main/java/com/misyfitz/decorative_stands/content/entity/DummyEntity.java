@@ -12,7 +12,10 @@ import com.mojang.authlib.GameProfile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -29,13 +32,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -44,6 +47,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraft.nbt.ListTag;
 
@@ -53,8 +57,7 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY); // HEAD, CHEST, LEGS, FEET
     private final NonNullList<ItemStack> handItems = NonNullList.withSize(2, ItemStack.EMPTY);  // MAIN, OFFHAND
     
-    @SuppressWarnings("removal")
-	private ResourceLocation skinTexture = new ResourceLocation("decorative_stands", "textures/entity/dummy.png");
+	private ResourceLocation skinTexture = ResourceLocation.fromNamespaceAndPath("decorative_stands", "textures/entity/dummy.png");
     
     public ResourceLocation getSkinTexture() {
         return skinTexture;
@@ -210,7 +213,7 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
                 swapItem(player, slot, held, hand);
         	}
         	else {
-                EquipmentSlot itemSlot = Mob.getEquipmentSlotForItem(held);
+                EquipmentSlot itemSlot = player.getEquipmentSlotForItem(held);
                 swapItem(player, itemSlot, held, hand);
         	}
         		
@@ -441,9 +444,15 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
             ItemStack held = player.getMainHandItem();
 
             // Axe or modded axe tool handling
-            if (held.canPerformAction(net.minecraftforge.common.ToolActions.AXE_DIG)) {
+            if (held.canPerformAction(ToolActions.AXE_DIG)) {
                 toolEfficiency = 2.0f;
-                int effLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.EFFICIENCY, held);
+
+                RegistryAccess access = player.level().registryAccess(); // works on both sides
+                Holder<Enchantment> efficiency = access.registryOrThrow(Registries.ENCHANTMENT)
+                    .getHolderOrThrow(Enchantments.EFFICIENCY);
+
+                int effLevel = EnchantmentHelper.getItemEnchantmentLevel(efficiency, held);
+
                 if (effLevel > 0) {
                     toolEfficiency += effLevel * 0.5f;
                 }
@@ -518,10 +527,10 @@ public class DummyEntity extends LivingEntity implements MenuProvider {
     }
 
     
-    @Override
-    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
-        // No loot
-    }
+//    @Override
+//    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
+//        // No loot
+//    }
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {

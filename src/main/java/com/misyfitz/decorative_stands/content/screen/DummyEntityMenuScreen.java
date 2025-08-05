@@ -21,8 +21,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class DummyEntityMenuScreen extends AbstractContainerScreen<DummyEntityMenu> {
 
-    @SuppressWarnings("removal")
-	private static final ResourceLocation DUMMY_GUI = new ResourceLocation(DecorativeStands.MODID, "textures/gui/dummy/inventory.png");
+	private static final ResourceLocation DUMMY_GUI = ResourceLocation.fromNamespaceAndPath(DecorativeStands.MODID, "textures/gui/dummy/inventory.png");
     @SuppressWarnings("unused")
 	private float renderRotation = 180f;
     @SuppressWarnings("unused")

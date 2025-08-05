@@ -13,9 +13,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 public class DSTags {
 	public static class Blocks{
 		
-		@SuppressWarnings({ "removal", "unused" })
+		@SuppressWarnings( "unused" )
 		private static TagKey<Block> tag(String name){
-			return BlockTags.create(new ResourceLocation(DecorativeStands.MODID, name));
+			return BlockTags.create(ResourceLocation.fromNamespaceAndPath(DecorativeStands.MODID, name));
 		}
 	}
 	
@@ -23,9 +23,8 @@ public class DSTags {
 		
 		public static final TagKey<Item> STANDS = tag("stands");
 		
-		@SuppressWarnings("removal")
 		private static TagKey<Item> tag(String name){
-			return ItemTags.create(new ResourceLocation(DecorativeStands.MODID, name));
+			return ItemTags.create(ResourceLocation.fromNamespaceAndPath(DecorativeStands.MODID, name));
 		}
 	}
 	

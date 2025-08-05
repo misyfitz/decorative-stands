@@ -10,10 +10,8 @@ import net.minecraft.client.renderer.RenderType;
 
 
 public class ScopeOverlay {
-    @SuppressWarnings("removal")
-	public static final ResourceLocation SPYGLASS_SCOPE = new ResourceLocation("decorative_stands", "textures/misc/spyglass_scope.png");
-    @SuppressWarnings("removal")
-	public static final ResourceLocation BINOCULAR_SCOPE = new ResourceLocation("decorative_stands", "textures/misc/binocular_scope.png");
+	public static final ResourceLocation SPYGLASS_SCOPE = ResourceLocation.fromNamespaceAndPath("decorative_stands", "textures/misc/spyglass_scope.png");
+	public static final ResourceLocation BINOCULAR_SCOPE = ResourceLocation.fromNamespaceAndPath("decorative_stands", "textures/misc/binocular_scope.png");
     
 //    @SuppressWarnings("unused")
 //	private static final TransparencyStateShard TRANSLUCENT_TRANSPARENCY = new TransparencyStateShard("translucent_transparency", () -> {

@@ -31,7 +31,6 @@ public class SpyglassStandBlockEntityRenderer implements BlockEntityRenderer<Spy
         this.tubeModel = new SpyglassTubeModel(context.bakeLayer(SpyglassTubeModel.SPYTUBE_LAYER));
     }
     
-    @SuppressWarnings({ "unused", "removal" })
 	@Override
     public void render(SpyglassStandBlockEntity blockEntity, float partialTicks, PoseStack poseStack,
                        MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
@@ -96,10 +95,10 @@ public class SpyglassStandBlockEntityRenderer implements BlockEntityRenderer<Spy
             poseStack.mulPose(Axis.XP.rotationDegrees(115));
             //System.out.println("[Spyglass Renderer] Block is NOT being used");
         }
-        RenderType renderType = RenderType.entitySolid(new ResourceLocation("decorative_stands", "textures/item/spyglass_tube.png"));
+        RenderType renderType = RenderType.entitySolid(ResourceLocation.fromNamespaceAndPath("decorative_stands", "textures/item/spyglass_tube.png"));
         VertexConsumer vertexConsumer = buffer.getBuffer(renderType);
 
-        tubeModel.renderToBuffer(poseStack, vertexConsumer, combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+        tubeModel.renderToBuffer(poseStack, vertexConsumer, combinedLight, combinedOverlay, 0xFFFFFFFF);
 
         poseStack.popPose();
     }

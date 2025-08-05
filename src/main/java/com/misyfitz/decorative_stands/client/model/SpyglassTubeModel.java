@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 public class SpyglassTubeModel extends Model {
     @SuppressWarnings("removal")
 	public static final ModelLayerLocation SPYTUBE_LAYER = new ModelLayerLocation(
-            new ResourceLocation(DecorativeStands.MODID, "spyglass_tube"), "main");
+            ResourceLocation.fromNamespaceAndPath(DecorativeStands.MODID, "spyglass_tube"), "main");
 
     private final ModelPart root;
     private final ModelPart tube;
@@ -56,11 +56,9 @@ public class SpyglassTubeModel extends Model {
     }
 
 
-
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay,
-                               float red, float green, float blue, float alpha) {
-        root.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int packedColor) {
+        root.render(poseStack, buffer, packedLight, packedOverlay, packedColor);
     }
 
     public void setupAnim(float time) {

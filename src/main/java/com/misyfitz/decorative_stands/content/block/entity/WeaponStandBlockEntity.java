@@ -63,18 +63,16 @@ public class WeaponStandBlockEntity extends BlockEntity {
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
-    @SuppressWarnings("deprecation")
 	@Override
     protected void saveAdditional(CompoundTag tag, Provider provider) {
         super.saveAdditional(tag, provider);
-        tag.put("inventory", inventory.serializeNBT());
+        tag.put("inventory", inventory.serializeNBT(provider));
     }
 
-    @SuppressWarnings("deprecation")
 	@Override
     public void loadAdditional(CompoundTag tag, Provider provider) {
         super.loadAdditional(tag, provider);
-        inventory.deserializeNBT(tag.getCompound("inventory"));
+        inventory.deserializeNBT(provider, tag.getCompound("inventory"));
     }
 
     @Override

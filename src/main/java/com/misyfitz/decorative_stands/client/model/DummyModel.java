@@ -11,8 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
 public class DummyModel<T extends LivingEntity> extends HumanoidModel<T> {
-	@SuppressWarnings({ "removal" })
-	public static final ModelLayerLocation DUMMY_LAYER = new ModelLayerLocation(new ResourceLocation(DecorativeStands.MODID, "dummy"), "main");
+	public static final ModelLayerLocation DUMMY_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DecorativeStands.MODID, "dummy"), "main");
     public DummyModel(ModelPart root) {
         super(root);
         // super will assign root, head, body, rightArm, leftArm, rightLeg, leftLeg internally

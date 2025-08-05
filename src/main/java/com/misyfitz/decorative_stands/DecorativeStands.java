@@ -51,7 +51,6 @@ public class DecorativeStands {
     public static IEventBus modEventBus;
     //private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
-    @SuppressWarnings("removal")
 	public DecorativeStands() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
@@ -88,9 +87,8 @@ public class DecorativeStands {
         DSCommands.register(event.getDispatcher());
     }
 
-    @SuppressWarnings("removal")
 	public static ResourceLocation asResource(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
     
     @Mod.EventBusSubscriber(
